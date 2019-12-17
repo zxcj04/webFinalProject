@@ -9,10 +9,21 @@ def index():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        if login_check(request.form['account'], request.form['password']):
+        status = login_check(request.form['account'], request.form['password'])
+
+        if status == 0:
             flash('login')
             # return redirect(url_for('myPage'), account=request.values['account'])
             return redirect(url_for('myPage', account=request.form.get('account')))
+        elif status == 1:
+            flash('account not exist, how about register one!')
+            
+            return redirect(url_for('login'))
+        elif status == 2:
+            flash('wrong password')
+
+            return redirect(url_for('login'))
+
 
     return render_template('index.html')
 
@@ -27,12 +38,12 @@ def login_check(ac, pa):
     try:
         accounts[ac]
     except:
-        return False
+        return 1
 
     if accounts[ac] == pa_hash: 
-        return True
+        return 0
     else:
-        return False
+        return 2
 
 @app.route("/hello/<account>")
 def myPage(account):

@@ -3,11 +3,28 @@
 
 <head>
     <title>INDEX</title>
+
+    <style>
+    
+        .message
+        {
+            color: red;
+        }
+
+    </style>
 </head>
 
 <body>
 
     INDEX
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p class="message">{{ message }}</p>
+        {% endfor %}
+    {%endif%}
+    {% endwith %}
 
     <form method="POST" action={{ url_for('login') }}>
 
