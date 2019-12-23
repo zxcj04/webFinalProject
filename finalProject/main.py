@@ -83,8 +83,14 @@ def register():
         status = registering(request.form['account'], request.form['password'], request.form['check_password'])
         if status == 0:
             flash('register success')
+            
+            user = User()
+
+            user.id = request.form['account']
+
+            login_user(user)
             # return redirect(url_for('myPage'), account=request.values['account'])
-            return redirect(url_for('myPage', account=request.form.get('account')))
+            return redirect(url_for('bookshelf'))
         elif status == 1:
             flash('account already exist')
 
@@ -105,7 +111,7 @@ def registering(ac, pa, ch):
 
     sha_pa = sha256(pa.encode('utf-8')).hexdigest()
 
-    accounts[ac] = sha_pa
+    users[ac] = sha_pa
 
     return 0
 
