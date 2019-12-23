@@ -4,16 +4,20 @@
 <head>
     <meta charset = "utf-8">
     <title>尼蠔一絲閱讀器Register</title>
-    <link rel="icon" href="../images/icon.ico" type="image/x-icon">
-
+    <link rel="icon" href="icon128.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
     <style type = "text/css">
+    *{
+        font-family: 'Noto Serif TC', serif;
+      }
         body{
             background-color: #e1dcd9;
             color: #A67F78;
         }
-    
         .message
         {
+            padding-left: 5%;
+            text-align: left;
             color: red;
         }
         #divvv{
@@ -24,15 +28,16 @@
             font-size: 20px;
         }
         img{
-            height: 50%;
-            width: 50%;
-            float: left;
+            width: 100%;
+            float: none;
+            display: block;
             margin-left: 10%;
         }
         #tt{
             float:left;
             margin-right: 5%;
             position: relative;
+            text-align: center;
             font-size: 25px;
         }
         .in{
@@ -43,17 +48,23 @@
             width: 90%;
             height: 30px; font-size: 20px;
             color: #A67F78;
-            border: #A67F78 1px solid;
-            
+            border: #A67F78 1px solid; 
+        }
+        input:focus{
+            outline: 1px #A67F78 solid;
         }
         .sub{
-            float:none;
+            float: none;
             width: 100px;
             height:auto;
             border: 0px;
+            background-color: whitesmoke;
         }
         .sub:hover{
             background-color: #F1E0D6;
+        }
+        .sub:focus{
+            outline: 1px #A67F78 solid;
         }
     </style>
 </head>
@@ -62,44 +73,68 @@
     <br><br>
     <div id = "divvv">
         <form method="POST" action={{ url_for('register') }}>
-            <span id = "tt">
-                <img src= "logo.png"></img>
-                <p style="position: absolute; bottom: 1%; left: 65%;">尼蠔一絲<br>註冊</p>
-            </span><br><br>
-            <hr style= "border: 0px; background-color: #A67F78; height: 3px;">
-            <p class="message">
-            </p>
-            <label>
-            <span class = "in">帳號</span><br>
-            <input type="text" name="account" id= "account"
-                placeholder="account" autofocus required>
-            </label>
-            <label>
-            <span class = "in">密碼</span><br>
-            <input type="password" name="password" id= "password"
-                placeholder="password" required>
-            </label><br>
-            <label>
-                <span class = "in">確認密碼</span><br>
-                <input type="password" name="check_password" id= "check_password"
-                placeholder="check password" required>
-            </label><br><br>
-            <input type="submit" name= "submit" value="註冊" class="sub">
-            <br><br>
+            <table style= "width: 100%;">
+                <thead>
+                    <tr id="tt">
+                        <td width=50%>
+                            <img src= "logo.png"></img>
+                        </td>
+                        <td style="padding-top: 10%; padding-right: 5%; padding-left: 10%; text-align: left;">尼蠔一絲<br>&nbsp&nbsp&nbsp註冊</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <hr style= "border:0px; position: relative; background-color: #A67F78; height: 3px;" width="100%">
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <td colspan="2" class="message">{{ message }}</td>
+                                {% endfor %}
+                            {%endif%}
+                        {% endwith %} -->
+                    </tr>
+                    <tr>
+                        <td colspan="2" class = "in">帳號
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" name="account" id= "account"
+                            placeholder="account" autofocus required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class = "in">密碼
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="password" name="password" id= "password"
+                            placeholder="password" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class = "in">確認密碼
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="password" name="check_password" id= "check_password"
+                            placeholder="check password" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"  style="padding-top: 20px; padding-bottom: 20px;">
+                            <input type="submit" name= "submit" value="註冊" class="sub">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </form>
     </div>
-<!--
-        
-      
-    <form method="POST" action={{ url_for('register') }}>
-
-        <input type="text" name="account" placeholder="account" autofocus required>
-        <input type="password" name="password" placeholder="password" required>
-        <input type="password" name="check_password" placeholder="check password" required>
-
-        <input type="submit" name="submit">
-
-    </form>
--->
 </body>
 </html>
