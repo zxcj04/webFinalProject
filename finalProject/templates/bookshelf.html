@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>INDEX</title>
+    <title>BookShelf</title>
     <link rel="icon" href="../images/icon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon">
 
@@ -13,12 +13,17 @@
             color: red;
         }
 
+        #account
+        {
+            color: blue;
+        }
+
     </style>
 </head>
 
 <body>
 
-    INDEX
+    <h1>BookShelf</h1>
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -28,15 +33,7 @@
     {%endif%}
     {% endwith %}
 
-    <form method="POST" action={{ url_for('login') }}>
-
-        <input type="text" name="account" placeholder="account" autofocus required>
-        <input type="password" name="password" placeholder="password" required>
-
-        <input type="submit" name="submit">
-        <input type="button" name="register" value="register" onclick="location.href = '{{ url_for('register') }}'"> 
-
-    </form>
+    <p id="account">{{account}}</p>
 
 </body>
 </html>
