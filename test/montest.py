@@ -1,8 +1,9 @@
 from pymongo import MongoClient
-client = MongoClient('localhost',username='user',password='pa',authSource='test')
+client = MongoClient('localhost',username='user',password='pa',authSource='project')
 
-db = client['test']
-collect = db['restaurants']
+db = client['project']
+users = db['users']
 
-for ele in collect.find():
-    print(ele)
+man = users.find_one({ "id" : "ad" })
+
+print(man)

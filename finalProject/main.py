@@ -14,16 +14,19 @@ class User(UserMixin):
     pass  
 
 @login_manager.user_loader  
-def user_loader(email):  
+def user_loader(id):  
     """  
  設置二： 透過這邊的設置讓flask_login可以隨時取到目前的使用者id   
  :param email:官網此例將email當id使用，賦值給予user.id    
- """   
-    if email not in users:  
+ """
+
+    man = users.find_one({ "id" : id })
+
+    if man == None:  
         return  
   
     user = User()  
-    user.id = email  
+    user.id = id  
     return user  
 
 @app.route("/")
@@ -75,12 +78,12 @@ def login_check(ac, pa):
 
     pa_hash = sha256(pa.encode('utf-8')).hexdigest()
 
-    try:
-        users.find() # [ac]
-    except:
+    man = users.find_one(users.find_one({ "id": ac }))
+
+    if man == None:
         return 1
 
-    if users[ac] == pa_hash: 
+    if man["password"] == pa_hash: 
         return 0
     else:
         return 2
@@ -116,7 +119,10 @@ def register():
     return render_template('register.html')
 
 def registering(ac, pa, ch):
-    if ac in users:
+
+    man = users.find_one({ "id" : ac})
+
+    if man is not None:
         return 1
 
     if pa != ch:
@@ -124,7 +130,17 @@ def registering(ac, pa, ch):
 
     sha_pa = sha256(pa.encode('utf-8')).hexdigest()
 
-    users[ac] = sha_pa
+    # users[ac] = sha_pa
+
+    data = {
+                "id" : ac,
+                "password" : sha_pa,
+                "books" : []
+            }
+
+    post_id = users.insert_one(data).inserted_id
+
+    print("registed: ", post_id)
 
     return 0
 
