@@ -7,7 +7,7 @@ login_manager = LoginManager(app)
 
 class User(UserMixin):  
     """  
- 設置一： 只是假裝一下，所以單純的繼承一下而以 如果我們希望可以做更多判斷，
+ 設置一： 只是假裝一下，所以單純的繼承一下而已 如果我們希望可以做更多判斷，
  如is_administrator也可以從這邊來加入 
  """
     
@@ -54,7 +54,6 @@ def login():
             login_user(user)
 
             # flash('login')
-            # return redirect(url_for('myPage'), account=request.values['account'])
             return redirect(url_for('bookshelf'))
         else:
             flash('Bad Login')
@@ -112,7 +111,7 @@ def register():
             user.id = request.form['account']
 
             login_user(user)
-            # return redirect(url_for('myPage'), account=request.values['account'])
+            
             return redirect(url_for('bookshelf'))
         elif status == 1:
             flash('account already exist')
@@ -180,9 +179,10 @@ def in_book(bookName):
 
     return render_template("in_book.html", bookName=bookName, maxPage=maxPage, thePages = thePages)
 
-@app.route("/book/<bookName>/<number>")
+# @app.route("/book/<bookName>/<number>")
+@app.route("/book/<bookName>/<pageName>")
 @login_required
-def in_page(bookName, number):
+def in_page(bookName, pageName):
 
     user = users.find_one({"id" : current_user.id})
 
@@ -198,7 +198,7 @@ def in_page(bookName, number):
 
     # thePage = pages.find_one({"bookName" : bookName}, {"number" : number})
 
-    thePage = pages.find_one({"bookName" : bookName}, {"pageName" : number})
+    thePage = pages.find_one({"bookName" : bookName}, {"pageName" : pageName})
 
     thePage = pages.find_one({"_id" : thePage["_id"]} )
 
