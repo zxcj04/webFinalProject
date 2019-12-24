@@ -4,6 +4,24 @@ client = MongoClient('localhost',username='user',password='pa',authSource='proje
 db = client['project']
 users = db['users']
 
-man = users.find_one({ "id" : "ad" })
+user = users.find_one({"id" : "admin"})
 
-print(man)
+bookName = "測試"
+
+# print(user["books"])
+
+if bookName not in user["books"]:
+    print("no")
+else:
+
+    books = db["books"]
+    pages = db["pages"]
+
+    theBook = books.find_one({"name" : bookName})
+
+    maxPage = theBook["maxPage"]
+
+    thePages = pages.find({"bookName" : bookName})
+
+    for ele in thePages:
+        print(ele["pageName"])

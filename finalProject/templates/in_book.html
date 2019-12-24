@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>BookShelf</title>
+    <title>inBook</title>
     <link rel="icon" href="../images/icon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon">
 
@@ -23,7 +23,7 @@
 
 <body>
 
-    <h1>BookShelf</h1>
+    <h1>inBook</h1>
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -33,15 +33,15 @@
     {%endif%}
     {% endwith %}
 
-    <p id="account">{{account}}</p>
+    <p id="bookName">{{ bookName }}</p>
 
-    <ul id="bookshelf">
-        {% for ele in books %}
-            <li class="books"><a href="/book/{{ ele }}">{{ ele }}</a></li>
+    <ul id="pages">
+        {% for ele in thePages: %}
+            <li><a href="/book/{{ bookName }}/{{ ele['pageName'] }}">{{ ele["pageName"] }}</a></li>
         {% endfor %}
     </ul>
 
-    <input type="button" onclick="location.href = '{{ url_for('logout') }}'" value="登出">
+    <input type="button" onclick="location.href = '{{ url_for('bookshelf') }}'" value="書架">
 
 </body>
 </html>

@@ -78,7 +78,7 @@ def login_check(ac, pa):
 
     pa_hash = sha256(pa.encode('utf-8')).hexdigest()
 
-    man = users.find_one(users.find_one({ "id": ac }))
+    man = users.find_one({ "id": ac })
 
     if man == None:
         return 1
@@ -91,7 +91,14 @@ def login_check(ac, pa):
 @app.route("/bookshelf")
 @login_required
 def bookshelf():
-    return render_template('bookshelf.html', account=current_user.id)
+
+    user = users.find_one({"id" : current_user.id})
+
+    books = db["books"]
+
+    myBooks = user["books"]
+
+    return render_template('bookshelf.html', account=current_user.id, books=myBooks)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -152,6 +159,50 @@ def logout():
     return redirect(url_for("index"))
 
 from flask_login import LoginManager
+
+@app.route("/book/<bookName>")
+@login_required
+def in_book(bookName):
+
+    user = users.find_one({"id" : current_user.id})
+
+    if bookName not in user["books"]:
+        return redirect(url_for("bookshelf"))
+
+    books = db["books"]
+    pages = db["pages"]
+
+    theBook = books.find_one({"name" : bookName})
+
+    maxPage = theBook["maxPage"]
+
+    thePages = pages.find({"bookName" : bookName})
+
+    return render_template("in_book.html", bookName=bookName, maxPage=maxPage, thePages = thePages)
+
+@app.route("/book/<bookName>/<number>")
+@login_required
+def in_page(bookName, number):
+
+    user = users.find_one({"id" : current_user.id})
+
+    if bookName not in user["books"]:
+        return redirect(url_for("bookshelf"))
+
+    books = db["books"]
+    pages = db["pages"]
+
+    theBook = books.find_one({"name" : bookName})
+
+    maxPage = theBook["maxPage"]
+
+    # thePage = pages.find_one({"bookName" : bookName}, {"number" : number})
+
+    thePage = pages.find_one({"bookName" : bookName}, {"pageName" : number})
+
+    thePage = pages.find_one({"_id" : thePage["_id"]} )
+
+    return render_template("in_page.html", bookName=bookName, pageName=thePage["pageName"], content=thePage["text"])
 
 if __name__ == '__main__':
     app.debug = True
