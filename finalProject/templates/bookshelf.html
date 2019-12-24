@@ -35,5 +35,13 @@
 
     <p id="account">{{account}}</p>
 
+    <ul id="bookshelf">
+        {% for ele in books %}
+            <li class="books"><a href="/book/{{ ele }}">{{ ele }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <input type="button" onclick="location.href = '{{ url_for('logout') }}'" value="登出">
+
 </body>
 </html>

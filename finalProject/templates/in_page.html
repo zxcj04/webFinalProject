@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>inPage</title>
+    <link rel="icon" href="../images/icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon">
+
+    <style>
+    
+        .message
+        {
+            color: red;
+        }
+
+        #account
+        {
+            color: blue;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>inPage</h1>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p class="message">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <p id="bookName">{{ bookName }}</p>
+
+    <h4 id="pageName">{{ pageName }}</h4>
+
+    <div id="content">
+        {{ content }}
+    </div>
+
+    <input type="button" onclick="location.href = '{{ url_for('bookshelf') }}'" value="書架">
+
+</body>
+</html>

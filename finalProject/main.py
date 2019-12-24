@@ -7,31 +7,41 @@ login_manager = LoginManager(app)
 
 class User(UserMixin):  
     """  
- 設置一： 只是假裝一下，所以單純的繼承一下而以 如果我們希望可以做更多判斷，
+ 設置一： 只是假裝一下，所以單純的繼承一下而已 如果我們希望可以做更多判斷，
  如is_administrator也可以從這邊來加入 
  """
     
     pass  
 
 @login_manager.user_loader  
-def user_loader(email):  
+def user_loader(id):  
     """  
  設置二： 透過這邊的設置讓flask_login可以隨時取到目前的使用者id   
  :param email:官網此例將email當id使用，賦值給予user.id    
- """   
-    if email not in users:  
+ """
+
+    man = users.find_one({ "id" : id })
+
+    if man == None:  
         return  
   
     user = User()  
-    user.id = email  
+    user.id = id  
     return user  
 
 @app.route("/")
 def index():
+    if current_user.is_authenticated:
+        return redirect(url_for('bookshelf'))
+
     return redirect(url_for('login'))
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+
+    if current_user.is_authenticated:
+        return redirect(url_for('bookshelf'))
+    
     if request.method == 'POST':
         status = login_check(request.form['account'], request.form['password'])
 
@@ -44,7 +54,6 @@ def login():
             login_user(user)
 
             # flash('login')
-            # return redirect(url_for('myPage'), account=request.values['account'])
             return redirect(url_for('bookshelf'))
         else:
             flash('Bad Login')
@@ -56,18 +65,24 @@ def login():
 
 from hashlib import sha256
 
-users = {'admin': '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'}
+# users = {'admin': '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'}
+
+from pymongo import MongoClient
+client = MongoClient('localhost',username='user',password='pa',authSource='project')
+
+db = client['project']
+users = db['users']
 
 def login_check(ac, pa):
 
     pa_hash = sha256(pa.encode('utf-8')).hexdigest()
 
-    try:
-        users[ac]
-    except:
+    man = users.find_one({ "id": ac })
+
+    if man == None:
         return 1
 
-    if users[ac] == pa_hash: 
+    if man["password"] == pa_hash: 
         return 0
     else:
         return 2
@@ -75,7 +90,14 @@ def login_check(ac, pa):
 @app.route("/bookshelf")
 @login_required
 def bookshelf():
-    return render_template('bookshelf.html', account=current_user.id)
+
+    user = users.find_one({"id" : current_user.id})
+
+    books = db["books"]
+
+    myBooks = user["books"]
+
+    return render_template('bookshelf.html', account=current_user.id, books=myBooks)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -89,7 +111,7 @@ def register():
             user.id = request.form['account']
 
             login_user(user)
-            # return redirect(url_for('myPage'), account=request.values['account'])
+            
             return redirect(url_for('bookshelf'))
         elif status == 1:
             flash('account already exist')
@@ -103,7 +125,10 @@ def register():
     return render_template('register.html')
 
 def registering(ac, pa, ch):
-    if ac in users:
+
+    man = users.find_one({ "id" : ac})
+
+    if man is not None:
         return 1
 
     if pa != ch:
@@ -111,7 +136,17 @@ def registering(ac, pa, ch):
 
     sha_pa = sha256(pa.encode('utf-8')).hexdigest()
 
-    users[ac] = sha_pa
+    # users[ac] = sha_pa
+
+    data = {
+                "id" : ac,
+                "password" : sha_pa,
+                "books" : []
+            }
+
+    post_id = users.insert_one(data).inserted_id
+
+    print("registed: ", post_id)
 
     return 0
 
@@ -123,6 +158,51 @@ def logout():
     return redirect(url_for("index"))
 
 from flask_login import LoginManager
+
+@app.route("/book/<bookName>")
+@login_required
+def in_book(bookName):
+
+    user = users.find_one({"id" : current_user.id})
+
+    if bookName not in user["books"]:
+        return redirect(url_for("bookshelf"))
+
+    books = db["books"]
+    pages = db["pages"]
+
+    theBook = books.find_one({"name" : bookName})
+
+    maxPage = theBook["maxPage"]
+
+    thePages = pages.find({"bookName" : bookName})
+
+    return render_template("in_book.html", bookName=bookName, maxPage=maxPage, thePages = thePages)
+
+# @app.route("/book/<bookName>/<number>")
+@app.route("/book/<bookName>/<pageName>")
+@login_required
+def in_page(bookName, pageName):
+
+    user = users.find_one({"id" : current_user.id})
+
+    if bookName not in user["books"]:
+        return redirect(url_for("bookshelf"))
+
+    books = db["books"]
+    pages = db["pages"]
+
+    theBook = books.find_one({"name" : bookName})
+
+    maxPage = theBook["maxPage"]
+
+    # thePage = pages.find_one({"bookName" : bookName}, {"number" : number})
+
+    thePage = pages.find_one({"bookName" : bookName}, {"pageName" : pageName})
+
+    thePage = pages.find_one({"_id" : thePage["_id"]} )
+
+    return render_template("in_page.html", bookName=bookName, pageName=thePage["pageName"], content=thePage["text"])
 
 if __name__ == '__main__':
     app.debug = True

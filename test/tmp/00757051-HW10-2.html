@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>15-Puzzle</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+        }
+
+        td, caption {
+            font-weight: bold;
+            font-family: helvetica, arial, sans-serif;
+        }
+
+        caption {
+            font-size: 3em;
+            color: gray;
+        }
+
+        td {
+            font-size: 4em;
+            color: blue;
+            border: 2px solid gray;
+            padding: 5px;
+        }
+
+        div {
+            font-size: 2em;
+            color: red;
+        }
+
+        button {
+            width: 75px;
+            height: 50px;
+        }
+    </style>
+    <script src="./jquery-3.4.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            setup();
+        });
+
+        var cells = [];
+
+        var msg;
+
+        var isWin = false;
+
+        function doClick(i, j)
+        {
+            if(isWin)
+                return;
+
+            var oristr = $("#cell" + i + j).text();
+
+            if(i != 0 && $("#cell" + (i - 1) + j).text() == ' ')
+            {
+                var repstr = $("#cell" + (i - 1) + j).text();
+
+                $("#cell" + (i - 1) + j).text(oristr);
+
+                // console.log($("#cell" + (i - 1) + j).text());
+            }
+            else if(i != 3 && $("#cell" + (i + 1) + j).text() == ' ')
+            {
+                var repstr = $("#cell" + (i + 1) + j).text();
+
+                $("#cell" + (i + 1) + j).text(oristr);
+
+                // console.log($("#cell" + (i + 1) + j).text());
+            }
+            else if(j != 0 && $("#cell" + i + (j - 1)).text() == ' ')
+            {
+                var repstr = $("#cell" + i + (j - 1)).text();
+
+                $("#cell" + i + (j - 1)).text(oristr);
+
+                // console.log($("#cell" + i + (j - 1)).text());
+            }
+            else if(j != 3 && $("#cell" + i + (j + 1)).text() == ' ')
+            {
+                var repstr = $("#cell" + i + (j + 1)).text();
+
+                $("#cell" + i + (j + 1)).text(oristr);
+
+                // console.log($("#cell" + i + (j + 1)).text());
+            }
+            else
+            {
+                return;
+            }
+
+            $("#cell" + i + j).text(repstr);
+            
+            check(i, j);
+
+            // checkWin
+
+            if(checkWin())
+            {
+                setTimeout(function(){
+                    alert("Congratulations! You Win!");
+                }, 200);
+
+                isWin = true;
+
+                document.getElementById("winMusic").play();
+            }
+        }
+
+        function checkWin()
+        {
+            for(let i = 0 ; i < 4 ; i++)
+            {
+                for(let j = 0 ; j < 4 ; j++)
+                {
+                    if(i == 3 && j == 3 && $("#cell" + i + j).text() == ' ')
+                        break;
+
+                    if(parseInt($("#cell" + i + j).text()) != i * 4 + j + 1)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        function gotoLastStep()
+        {
+            if(isWin)
+                return;
+
+            var blank = Math.floor((Math.random() * 2));
+
+            var patterns = [
+                "1 2 3 4 5 6 7 8 9 10 11 B 13 14 15 12", 
+                "1 2 3 4 5 6 7 8 9 10 11 12 13 14 B 15"
+            ];
+
+            console.log("blank: " + blank);
+
+            console.log(patterns[blank]);
+
+            var choosen = patterns[blank].split(' ');
+
+            var count = 0;
+
+            for(let i = 0 ; i < 4 ; i++)
+            {
+                for(let j = 0 ; j < 4 ; j++)
+                {
+                    let str = String(choosen[count]);
+                        
+                    if(str == 'B')
+                    {
+                        str = ' ';
+                    }
+                    else if(str.length < 2)
+                    {
+                        str = "0" + str;
+                    }
+
+                    $("#cell" + i + j).text(str);
+
+                    count++;
+                }
+            }
+        }
+
+        function importData()
+        {
+            $("#loading").show();
+
+            isWin = false;
+
+            var list = ["https://api.myjson.com/bins/yni16", "https://api.myjson.com/bins/worqi"
+                      , "https://api.myjson.com/bins/ude6y"];
+
+            $.getJSON(list[Math.floor((Math.random() * list.length ))], function(result){
+
+                var which = Math.floor((Math.random() * result["puzzleData"].length ));
+            
+                $.each(result["puzzleData"][which], function(u, celldata){
+                    $.each(celldata, function(v, inq){
+                        // console.log( j, u, v, inq);
+                        if(inq != '')
+                            $("#cell" + u + v).text(inq);
+                        else
+                        {
+                            $("#cell" + u + v).text(' ');
+                        }
+                    });
+                });
+                
+                $("#loading").hide();
+
+                if(checkWin())
+                {
+                    setTimeout(function(){
+                        alert("Congratulations! You Win!");
+                    }, 200);
+
+                    isWin = true;
+
+                    document.getElementById("winMusic").play();
+                }
+            });
+        }
+
+        var BGMon = true;
+
+        function switchBGM()
+        {
+
+            BGMon = !BGMon;
+
+            // console.log(BGMon);
+
+            var music = document.getElementById("music");
+
+            if(BGMon)
+            {
+                music.play();
+            }
+            else
+            {
+                music.pause();
+            }
+        }
+
+        function setup()
+        {
+            msg = document.getElementById('msg');
+
+            var shu = "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 B";
+
+            shu = shu.split(' ');
+
+            shu.sort(() => Math.random() - 0.5);
+
+            var count = 0;
+
+            for(let i = 0 ; i < 4 ; i++)
+            {
+                for(let j = 0 ; j < 4 ; j++)
+                {
+                    let str = String(shu[count]);
+
+                    count++;
+
+                    if(str == 'B')
+                        str = ' ';
+                    else if(str.length < 2)
+                        str = "0" + str;
+                    
+                    $('#cell' + i + j).text(str);
+
+                    $('#cell' + i + j).hover( function(){
+                        check(i, j);
+                        // console.log(i + ' ' + j);
+                    }, function(){
+                        msg.innerHTML = '';
+                    });
+                }
+            }
+
+            $("#laststepBtn").click(function(){
+                gotoLastStep();
+            })
+            
+            $("#importData").click(function(){
+                importData();
+            })
+
+            $("#switchBGM").click(function(){
+                switchBGM();
+            })
+        }
+
+        function check(i, j)
+        {
+            if($("#cell" + i + j).text() == ' ')
+            {
+                // console.log("0");
+                
+                msg.innerHTML = "This is a blank cell!";
+            }
+            else if(i != 0 && $("#cell" + (i - 1) + j).text() == ' ')
+            {
+                // console.log("1");
+            
+                msg.innerHTML = "This tile can move up!";
+            }
+            else if(i != 3 && $("#cell" + (i + 1) + j).text() == ' ')
+            {
+                // console.log("2");
+            
+                msg.innerHTML = "This tile can move down!";
+            }
+            else if(j != 0 && $("#cell" + i + (j - 1)).text() == ' ')
+            {
+                // console.log("3");
+            
+                msg.innerHTML = "This tile can move left!";
+            }
+            else if(j != 3 && $("#cell" + i + (j + 1)).text() == ' ')
+            {
+                // console.log("4");
+            
+                msg.innerHTML = "This tile can move right!";
+            }
+            else
+            {
+                // console.log("N");
+                msg.innerHTML = "Illegal move!";
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <audio src="./offlimits.mp3" style="display: none;" id="music" loop autoplay></audio>
+    <audio src="./applause.mp3" style="display: none;" id="winMusic"></audio>
+
+    <table id="board">
+        <caption>15-Puzzle</caption>
+        <tbody>
+            <tr>
+                <td onclick="doClick( 0, 0 )" id="cell00"> </td>
+                <td onclick="doClick( 0, 1 )" id="cell01">15</td>
+                <td onclick="doClick( 0, 2 )" id="cell02">14</td>
+                <td onclick="doClick( 0, 3 )" id="cell03">13</td>
+            </tr>
+            <tr>
+                <td onclick="doClick( 1, 0 )" id="cell10">12</td>
+                <td onclick="doClick( 1, 1 )" id="cell11">11</td>
+                <td onclick="doClick( 1, 2 )" id="cell12">10</td>
+                <td onclick="doClick( 1, 3 )" id="cell13">09</td>
+            </tr>
+            <tr>
+                <td onclick="doClick( 2, 0 )" id="cell20">08</td>
+                <td onclick="doClick( 2, 1 )" id="cell21">07</td>
+                <td onclick="doClick( 2, 2 )" id="cell22">06</td>
+                <td onclick="doClick( 2, 3 )" id="cell23">05</td>
+            </tr>
+            <tr>
+                <td onclick="doClick( 3, 0 )" id="cell30">04</td>
+                <td onclick="doClick( 3, 1 )" id="cell31">03</td>
+                <td onclick="doClick( 3, 2 )" id="cell32">02</td>
+                <td onclick="doClick( 3, 3 )" id="cell33">01</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <img src="./loading.gif" style="position:absolute;top:85px;left:20px;" id="loading" hidden>
+
+    <p>
+        <button onclick="location.reload()" id="restartBtn">Restart Game</button>
+        <button id="laststepBtn">Go to the Last Step</button>
+        <button id="importData">Import Data</button>
+        <button id="switchBGM">Switch BGM</button>
+    </p>
+    <div id="msg"></div>
+    <div id="ddd"></div>
+</body>
+
+</html>
