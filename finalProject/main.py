@@ -63,14 +63,20 @@ def login():
 
 from hashlib import sha256
 
-users = {'admin': '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'}
+# users = {'admin': '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'}
+
+from pymongo import MongoClient
+client = MongoClient('localhost',username='user',password='pa',authSource='project')
+
+db = client['project']
+users = db['users']
 
 def login_check(ac, pa):
 
     pa_hash = sha256(pa.encode('utf-8')).hexdigest()
 
     try:
-        users[ac]
+        users.find() # [ac]
     except:
         return 1
 
