@@ -28,10 +28,17 @@ def user_loader(email):
 
 @app.route("/")
 def index():
+    if current_user.is_authenticated:
+        return redirect(url_for('bookshelf'))
+
     return redirect(url_for('login'))
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+
+    if current_user.is_authenticated:
+        return redirect(url_for('bookshelf'))
+    
     if request.method == 'POST':
         status = login_check(request.form['account'], request.form['password'])
 
