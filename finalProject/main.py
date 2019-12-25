@@ -5,20 +5,11 @@ app = Flask(__name__)
 app.secret_key = 'Your Key'  
 login_manager = LoginManager(app)  
 
-class User(UserMixin):  
-    """  
- 設置一： 只是假裝一下，所以單純的繼承一下而已 如果我們希望可以做更多判斷，
- 如is_administrator也可以從這邊來加入 
- """
-    
+class User(UserMixin):    
     pass  
 
 @login_manager.user_loader  
 def user_loader(id):  
-    """  
- 設置二： 透過這邊的設置讓flask_login可以隨時取到目前的使用者id   
- :param email:官網此例將email當id使用，賦值給予user.id    
- """
 
     man = users.find_one({ "id" : id })
 
