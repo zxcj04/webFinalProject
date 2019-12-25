@@ -1,0 +1,14 @@
+myPage:
+1.
+nav處理 (同1行)
+(int) count= 開了幾本書
+(if (count* 150)>screen.width)
+nav{
+	width=(screen.width/ count)px;
+}
+
+2.
+#divvv{
+            height: (screen.height-300)px;
+}
+

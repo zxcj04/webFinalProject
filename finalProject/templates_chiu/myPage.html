@@ -29,6 +29,8 @@
             background-color: #e1dcd9;
             padding: 3%;
             clear: both;
+            height: 400px;
+            overflow: scroll;
         }
         img{
             width: 100px;
@@ -98,7 +100,7 @@
         }
         #navPart{
             background-color: #8f8681;
-            padding: 3%;
+            padding: 15px;
         }
         nav{
             float:left;
@@ -119,6 +121,15 @@
         .chapContent{
             text-align: left;
         }
+        .feature{
+            width: 50px;
+            height: 50px;
+            border: 0px;
+            background-color: whitesmoke;
+        }
+        .feature:hover{
+            background-color: #F1E0D6;
+        }
     </style>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     
@@ -127,7 +138,7 @@
 
 <body>
     <a href={{ url_for('index') }}> 
-        <img src= "logo.png"></img>
+        <img src= "logo.png">
     </a>
     <span id = "tt">
         <br><br>&nbsp&nbsp&nbsp尼蠔一絲閱讀<br><br>
@@ -156,9 +167,13 @@
                 林峰還沒反應過來，就被張雅茹這女人狠狠一腳踹到了床下，他沒想到張雅茹在床上這麼彪悍，這女人以後要是跟自己睡一張床，指不定把自己折騰成什麼樣。他剛揉了揉疼得發麻的屁股，抬頭時，卻看見張雅茹嗖地一下就從床上坐直了身體，並下意識的將被褥裹在身上，戰戰兢兢說道︰“你——怎麼在這里？”穿著睡衣的林峰慢慢地從地板上站了起來，揉了揉屁股，解釋道︰“這是我家。”“你家？”張雅茹愣了一下，扭頭掃了一眼房間，發現這里十分陌生。張雅茹又低頭看了一眼自己所睡的床，頓時反應過來，裹著被子下了床，抓狂的在房間里尋覓了一圈，最終把目光鎖定在電腦桌上的那把剪刀，一把抓起剪刀攥在手里，對林峰咬牙切齒的怒斥道︰“你這個混蛋，我要殺了你！”林峰見她抓起了剪刀，下意識的後退，並與她在十平方不到的臥室里展開了激烈的追逐戰，他知道被張雅茹追上了，今天非死即傷。“我要殺你了！”張雅茹左手掖著裹著身體的被褥，右手攥著剪刀一個勁的追他。但是，張雅茹沒想到林峰跑起來身輕如燕，動作敏捷，還在床上來回翻跟頭，她追了好幾圈，連林峰的身體都被踫到一下，氣得她喘著粗氣罵道︰“你混蛋！我要殺了你！”林峰站在床上，忙不迭的解釋道︰“張大總裁，你別沖動，你听我解釋，不是你想的那樣，咱們什麼都沒有……”張雅茹咬牙切齒的說︰“你個卑鄙小人，做都做了，還不敢承認，你還是個男人嗎？”林峰聞言，滿臉苦澀的說道︰“張總，關鍵是我什麼都沒做啊！”“什麼都沒做？鬼才相信你！”說罷，張雅茹又打算繼續追逐白振東，今天非剪了他不可，這臭男人實在可惡，之前佔了自己的便宜不說，這回還跟自己同睡一張床，她不敢想昨晚發生了什麼，想想就覺得崩潰。
             </p>
         </div>
-        <span>
-            <input type="image" class="sub">
-        </span>
+        <div style="padding-top: 10px; text-align:center">
+            <input type="button" value="◀" class="feature">
+            <input type="button" value="☖" class="feature">
+            <input type="button" value="☰" class="feature">
+            <input type="button" value="★" class="feature">
+            <input type="button" value="▶" class="feature">
+        </div>
     </div>
 </body>
 </html>
