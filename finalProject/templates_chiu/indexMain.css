@@ -1,0 +1,71 @@
+*{
+        font-family: 'Noto Serif TC', serif;
+      }
+        body{
+            background-color: #e1dcd9;
+            color: #A67F78;
+        }
+        #divvv{
+            width: 40%;
+            margin: 0px auto;
+            border: 3pt solid;
+            text-align: center;
+            font-size: 25px;
+        }
+        #tt
+        {
+            font-size:35px;
+        }
+        .in{
+            float: left;
+            margin-left: 10%;
+        }
+        input{
+            width: 90%;
+            height: 30px; font-size: 25px;
+            color: #A67F78;
+            border: #A67F78 1px solid;
+        }
+        .message
+        {
+            padding-left: 5%;
+            text-align: left;
+            color: red;
+        }
+        img{
+            height: 60%;
+            width: 60%;
+        }
+        .check{
+            float: left;
+            width: auto;
+            height: auto;
+            margin-top: 10px;
+            margin-left: 5%;
+        }
+        input:focus{
+            outline: 1px #A67F78 solid;
+        }
+        .sub{
+            float: none;
+            width: 100px;
+            height: auto;
+            border: 0px;
+            background-color: whitesmoke;
+        }
+        .sub:hover{
+            background-color: #F1E0D6;
+        }
+        .sub:focus{
+            outline: 1px #A67F78 solid;
+        }
+        a{
+            color: #A67F78;
+            text-decoration: none;
+        }
+        /* a:hover{
+        } */
+        a:visited{
+            color: #A67F78;
+            text-decoration: none;
+        }
