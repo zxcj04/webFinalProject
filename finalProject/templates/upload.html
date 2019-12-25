@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
 <head>
-    <title>inBook</title>
+    <title>Upload</title>
     <link rel="icon" href="../images/icon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon">
 
@@ -19,11 +18,10 @@
         }
 
     </style>
+
 </head>
-
 <body>
-
-    <h1>inBook</h1>
+    <h1>Upload</h1>
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -33,15 +31,12 @@
     {% endif %}
     {% endwith %}
 
-    <p id="bookName">{{ bookName }}</p>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
 
-    <ul id="pages">
-        {% for ele in thePages: %}
-            <li><a href="/book/{{ bookName }}/{{ ele['number'] }}">{{ ele["pageName"] }}</a></li>
-        {% endfor %}
-    </ul>
-
+    <br>
     <input type="button" onclick="location.href = '{{ url_for('bookshelf') }}'" value="書架">
-
 </body>
 </html>

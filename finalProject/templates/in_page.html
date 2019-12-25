@@ -38,7 +38,9 @@
     <h4 id="pageName">{{ pageName }}</h4>
 
     <div id="content">
-        {{ content }}
+        {% for ele in content %}
+            <p class="in"> {{ ele }} </p>
+        {% endfor %}
     </div>
 
     <input type="button" onclick="location.href = '{{ url_for('bookshelf') }}'" value="書架">

@@ -21,7 +21,9 @@ else:
 
     maxPage = theBook["maxPage"]
 
-    thePages = pages.find({"bookName" : bookName})
+    thePages = pages.find_one({"bookName" : bookName, "number": 1})
 
-    for ele in thePages:
-        print(ele["pageName"])
+    # for ele in thePages:
+    #     print(ele["pageName"])
+
+    print(thePages)
