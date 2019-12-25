@@ -1,5 +1,7 @@
 from flask import *
 from flask_login import LoginManager, UserMixin, login_user, current_user, login_required, logout_user, login_required
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)  
 app.secret_key = 'Your Key'  
@@ -170,10 +172,10 @@ def in_book(bookName):
 
     return render_template("in_book.html", bookName=bookName, maxPage=maxPage, thePages = thePages)
 
-# @app.route("/book/<bookName>/<number>")
-@app.route("/book/<bookName>/<pageName>")
+@app.route("/book/<bookName>/<number>")
+# @app.route("/book/<bookName>/<pageName>")
 @login_required
-def in_page(bookName, pageName):
+def in_page(bookName, number):
 
     user = users.find_one({"id" : current_user.id})
 
@@ -187,13 +189,40 @@ def in_page(bookName, pageName):
 
     maxPage = theBook["maxPage"]
 
-    # thePage = pages.find_one({"bookName" : bookName}, {"number" : number})
-
-    thePage = pages.find_one({"bookName" : bookName}, {"pageName" : pageName})
-
-    thePage = pages.find_one({"_id" : thePage["_id"]} )
+    thePage = pages.find_one({"bookName" : bookName, "number" : float(number)})
 
     return render_template("in_page.html", bookName=bookName, pageName=thePage["pageName"], content=thePage["text"])
+
+basepath = os.path.dirname(__file__)
+UPLOAD_FOLDER = basepath + "/tmp"
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'html'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['GET', 'POST'])
+@login_required
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            flash("success upload \"" + file.filename + "\"")
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('upload_file'))
+
+    return render_template("upload.html")
 
 if __name__ == '__main__':
     app.debug = True
