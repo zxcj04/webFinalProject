@@ -14,11 +14,11 @@
         <br><br>
        <div id = "divvv">
            <form method="POST" action={{ url_for('login') }}>
+               <a href={{ url_for('index') }}> 
+                   <img src= "logo.png"></img>
+                </a>
+                <br>
                 <span id = "tt">
-                    <a href={{ url_for('index') }}> 
-                        <img src= "logo.png"></img>
-                    </a>
-                    <br>
                     <a href={{ url_for('index') }}> 尼蠔一絲閱讀器
                     </a>
                 </span>
@@ -51,6 +51,85 @@
                 <input type="button" value="註冊" class="inputButton" onclick="{{url_for('register')}}">
                 <button type="submit" class="sub">登入</button>
            </form>
+       </div>
+
+       <div id= "regdiv">
+            <span class="closebtn">
+                ✖
+            </span>
+        <form method="POST" action={{ url_for('register') }}>
+            <table style= "width: 100%;">
+                <thead>
+                    <tr id="regtt">
+                        <td width=50%>
+                            <a href={{ url_for('index') }}> 
+                            <img src= "logo.png"></a>
+                        </td>
+                        <td style="padding-top: 10%; padding-right: 5%; padding-left: 10%; text-align: left;">尼蠔一絲<br>&nbsp&nbsp&nbsp註冊</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <hr style= "border:0px; position: relative; background-color: #A67F78; height: 3px;" width="100%">
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <td colspan="2" class="message">{{ message }}</td>
+                                {% endfor %}
+                            {%endif%}
+                        {% endwith %} -->
+                    </tr>
+                    <tr>
+                        <td colspan="2" class = "in">帳號 Account
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label>
+                            <i class="fa fa-user" style="position:absolute; margin-top: 7px; right: 7px"></i>
+                            <input type="text" name="account" id= "account" class="textInput"
+                            placeholder="account" autofocus required>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class = "in">密碼 Password
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label>
+                            <i class="fa fa-lock" style="position:absolute; margin-top: 7px; right: 7px"></i>
+                            <input type="password" name="password" id= "password" class="textInput"
+                            placeholder="password" required>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class = "in">確認密碼 Check Password
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <i class="fa fa-lock" style="position:absolute; margin-top: 7px; right: 7%"></i>
+                            <input type="password" name="check_password" id= "check_password" class="textInput"
+                            placeholder="check password" required>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" style="padding-top: 20px; padding-bottom: 20px; padding-left:30%">
+                            <button type="submit" name= "submit" class="sub">註冊</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form>
        </div>
 
        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
