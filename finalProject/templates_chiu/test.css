@@ -1,0 +1,43 @@
+body{
+    background-color: #e1dcd9;
+    color: #A67F78;
+}
+  /* GENERAL BUTTON STYLING */
+  button,
+  button::after {
+    -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+      transition: all 0.3s;
+  }
+  
+  button {
+    background: none;
+    border: #A67F78 1px solid;;
+    color: #A67F78;
+    display: block;
+    position: relative;
+    text-transform: uppercase;
+  }
+  
+  button::before, button::after {
+    background: whitesmoke;
+    content: '';
+    position: absolute;
+    z-index: -1;
+  }
+  
+  button:hover {
+    font-weight: bold;
+  }
+  
+  .sub::after {
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 0;
+  }
+  
+  .sub:hover:after {
+    width: 100%;
+  }

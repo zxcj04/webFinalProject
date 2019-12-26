@@ -6,6 +6,7 @@
       <title>尼蠔一絲閱讀器</title>
       <link rel="icon" href="icon128.ico" type="image/x-icon">
       <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel= "stylesheet" href= "indexMain.css">
 
    </head>
@@ -30,23 +31,31 @@
                 {%endif%}
                 {% endwith %} -->
                 <label>
-               <span class = "in">帳號</span><br>
-                <input type="text" id= "account"
-                    name= "account" autofocus required>
+                    <span class = "in">帳號 Account</span>
+                    <br>
+                    <i class="fa fa-user" style="position:absolute; margin-top: 7px; right: 7px"></i>
+                    <input type="text" id= "account" class="textInput"
+                        name= "account" placeholder="account" required>
                 </label>
                 <label>
-                <span class = "in">密碼</span><br>
-                <input type="password" id= "password"
-                    name= "password" required>
+                    <span class = "in">密碼 Password</span>
+                    <br><br>
+                    <i class="fa fa-lock" style="position:absolute; margin-top: 7px; right: 7px"></i>
+                    <input type="password" id= "password" class="textInput"
+                        name= "password" placeholder="password" required>
                 </label><br>
-                <label>
+
                 <input type="checkbox" class="check" name="rememberMe">
-                <span style= "float: left;">記住我</span><br><br>
-                </label>
-                <input type="button" value="註冊" class="sub" onclick="{{url_for('register')}}">
-                <input type="submit" value="登入" class="sub">
-                <br><br>
+                <span style= "float: left;">記住我</span><br>
+                <br>
+                <input type="button" value="註冊" class="inputButton" onclick="{{url_for('register')}}">
+                <button type="submit" class="sub">登入</button>
            </form>
        </div>
+
+       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+       </script>
+       <script src="indexMain.js">
+       </script>
     </body>
 </html>

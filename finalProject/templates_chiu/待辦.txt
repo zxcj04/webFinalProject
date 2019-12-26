@@ -8,11 +8,6 @@ nav{
 }
 
 2.
-#divvv{
-            height: (screen.height-300)px;
-}
-
-3.
 RWD
 
 備註:
