@@ -1,11 +1,12 @@
 from flask import *
 from flask_login import LoginManager, UserMixin, login_user, current_user, login_required, logout_user, login_required
-from werkzeug.utils import secure_filename
 import os
 
-app = Flask(__name__)  
-app.secret_key = 'Your Key'  
+app = Flask(__name__)
+app.secret_key = "MINE"
 login_manager = LoginManager(app)  
+
+available_filename = []
 
 class User(UserMixin):    
     pass  
@@ -204,7 +205,7 @@ def allowed_file(filename):
 
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
-def upload_file():
+def upload():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -216,15 +217,69 @@ def upload_file():
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
+
         if file and allowed_file(file.filename):
+            user = users.find_one({"id" : current_user.id})
+
+            bookName = request.form['bookName']
+
+            pages = db["pages"]
+            books = db["books"]
+
+            if bookName not in user["books"]:
+
+                if books.find_one({ "name" : bookName }) != None:
+                    flash("book already exist, but you dont own it!")
+
+                    return redirect(request.url) 
+                
+                flash("add a new book")
+
+                # "name" : "測試",
+                # "maxPage" : 1
+
+                books.insert_one({"name" : bookName, "maxPage" : 0 })
+
+                users.update_one({"id" : current_user.id}, { "$push" : { "books" : bookName } })
+
             flash("success upload \"" + file.filename + "\"")
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('upload_file'))
+
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+
+            maxPage = books.find_one({ "name" : bookName })["maxPage"]
+
+            books.update_one({ "name" : bookName}, { "$inc" : { "maxPage" : 1} })
+
+            text = transformTxT(file.filename)
+
+            pageName = file.filename
+
+            pageName = pageName.split(".")[0]
+
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+
+            # "bookName" : "測試",
+            # "pageName" : "第一頁",
+            # "number" : 1,
+            # "text" :  ["11月中，台泥集團
+
+            pages.insert_one({ "bookName" : bookName, "pageName" : pageName, "number" : maxPage + 1, "text" : text })
+
+            return redirect(url_for('upload'))
 
     return render_template("upload.html")
 
+def transformTxT(filename):
+
+    with open("finalProject/tmp/" + filename, "r") as fp:
+
+        ori = fp.read()
+
+    ori = ori.split("\n")
+
+    return ori
+
 if __name__ == '__main__':
+    available_filename = list(range(100))
     app.debug = True
-    app.secret_key = "MINE"
     app.run()

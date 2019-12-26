@@ -39,10 +39,11 @@
 
     <div id="content">
         {% for ele in content %}
-            <p class="in"> {{ ele }} </p>
+            <p class="in_content"> {{ ele }} </p>
         {% endfor %}
     </div>
 
+    <input type="button" onclick="location.href = '/book/{{ bookName }}'" value="書頁">
     <input type="button" onclick="location.href = '{{ url_for('bookshelf') }}'" value="書架">
 
 </body>
