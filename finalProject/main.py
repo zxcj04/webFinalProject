@@ -1,6 +1,8 @@
 from flask import *
 from flask_login import LoginManager, UserMixin, login_user, current_user, login_required, logout_user, login_required
 import os
+from hashlib import sha256
+from pymongo import MongoClient
 
 app = Flask(__name__)
 app.secret_key = "MINE"
@@ -55,13 +57,8 @@ def login():
             return redirect(url_for('login'))
 
 
-    return render_template('index.html')
+    return render_template('index_1.html')
 
-from hashlib import sha256
-
-# users = {'admin': '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'}
-
-from pymongo import MongoClient
 client = MongoClient('localhost',username='user',password='pa',authSource='project')
 
 db = client['project']
@@ -91,7 +88,7 @@ def bookshelf():
 
     myBooks = user["books"]
 
-    return render_template('bookshelf.html', account=current_user.id, books=myBooks)
+    return render_template('myBookCase.html', account=current_user.id, books=myBooks)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -116,7 +113,7 @@ def register():
 
             return redirect(url_for('register'))
 
-    return render_template('register.html')
+    return render_template('index.html')
 
 def registering(ac, pa, ch):
 
@@ -192,11 +189,14 @@ def in_page(bookName, number):
 
     thePage = pages.find_one({"bookName" : bookName, "number" : float(number)})
 
-    return render_template("in_page.html", bookName=bookName, pageName=thePage["pageName"], content=thePage["text"])
+    if thePage == None:
+        return redirect(url_for("bookshelf"))
+
+    return render_template("myPage.html", bookName=bookName, pageName=thePage["pageName"], content=thePage["text"])
 
 basepath = os.path.dirname(__file__)
 UPLOAD_FOLDER = basepath + "/tmp"
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'html'}
+ALLOWED_EXTENSIONS = {'txt'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
@@ -267,7 +267,7 @@ def upload():
 
             return redirect(url_for('upload'))
 
-    return render_template("upload.html")
+    return render_template("upLoadBook.html")
 
 def transformTxT(filename):
 
