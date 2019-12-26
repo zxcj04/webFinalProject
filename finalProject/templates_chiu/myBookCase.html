@@ -6,102 +6,14 @@
     <title>尼蠔一絲書架</title>
     <link rel="icon" href="icon128.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
-    <style type = "text/css">
-    *{
-        font-family: 'Noto Serif TC', serif;
-      }
-        body{
-            background-color: #e1dcd9;
-            color: #A67F78;
-        }
-        .message
-        {
-            padding-left: 5%;
-            text-align: left;
-            color: red;
-        }
-        #divvv{
-            width: 60%;
-            margin: 0px auto;
-            border: 3pt solid;
-            text-align: center;
-            font-size: 20px;
-        }
-        img{
-            width: 200px;
-            height: 200px;
-            float: left;
-            display: block;
-            margin-left: 5%;
-        }
-        #tt{
-            float: none;
-            font-size: 25px;
-        }
-        .in{
-            float: left;
-            margin-left: 10%;
-        }
-        input{
-            width: 90%;
-            height: 30px; font-size: 20px;
-            color: #A67F78;
-            border: #A67F78 1px solid; 
-        }
-        input:focus{
-            outline: 1px #A67F78 solid;
-        }
-        .option{
-            color: #A67F78;
-            border: #A67F78 0px solid;
-            background-color: whitesmoke;
-        }
-        .option:focus{
-            outline: 0px #A67F78 solid;
-        }
-        .sub{
-            float: none;
-            width: 100px;
-            height:auto;
-            border: 0px;
-            background-color: whitesmoke;
-        }
-        .sub:hover{
-            background-color: #F1E0D6;
-        }
-        .sub:focus{
-            outline: 1px #A67F78 solid;
-        }
-        a{
-            color: #A67F78;
-            text-decoration: none;
-        }
-        /* a:hover{
-        } */
-        a:visited{
-            color: #A67F78;
-            text-decoration: none;
-        }
-        table{
-            border-collapse: collapse;
-        }
-        tbody td{
-            border: #A67F78 1px solid;
-        }
-        hr{
-            border:0px;
-            background-color: #A67F78;
-            height: 3px;
-        }
-    </style>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    <link rel= "stylesheet" href= "myBookCaseMain.css">
+    <link rel= "stylesheet" href= "SortBy.css">
     
-    </script> 
 </head>
 
 <body>
     <a href={{ url_for('index') }}> 
-        <img src= "logo.png"></img>
+        <img src= "logo.png">
     </a>
     <div id = "tt">
         <br><br><br><br>&nbsp&nbsp尼蠔~ 書架
@@ -129,14 +41,16 @@
                 </tr>
                 <tr>
                     <td colspan="2"  style="text-align: right">
-                        <select name="SortBy" class="option">
-                            <option value="recent">最近閱讀</option>
-                            <option value="longest">最舊閱讀</option>
-                            <option value="byName">名稱</option>
-                            <option value="favorite">我的最愛</option>
-                            <option value="notEnd">未讀完</option>
-                        </select>
-                        &nbsp&nbsp
+                        <div class="center">
+                            <select name="sources" id="sources" class="custom-select sources" placeholder="最近閱讀">
+                                <option value="recent">最近閱讀</option>
+                                <option value="longest">最舊閱讀</option>
+                                <option value="byName">名稱</option>
+                                <option value="favorite">我的最愛</option>
+                                <option value="notEnd">未讀完</option>
+                            </select>
+                            &nbsp&nbsp
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -146,24 +60,24 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>權寵天下</td>
-                    <td>747.沒希望了</td>
+                    <td><a href="{{ url_for('') }}">權寵天下</td></a>
+                    <td><a href="{{ url_for('') }}">747.沒希望了</td></a>
                 </tr>
                 <tr>
-                    <td>小姨的秘密</td>
-                    <td>001.行屍走肉</td>
+                    <td><a href="{{ url_for('') }}">小姨的秘密</td></a>
+                    <td><a href="{{ url_for('') }}">001.行屍走肉</td></a>
                 </tr>
                 <tr>
-                    <td>酒神(陰陽冕)</td>
-                    <td>409.更加強烈</td>
+                    <td><a href="{{ url_for('') }}">酒神(陰陽冕)</td></a>
+                    <td><a href="{{ url_for('') }}">409.更加強烈</td></a>
                 </tr>
                 <tr>
-                    <td>修真聊天群</td>
-                    <td>3100.裝霸宋的逼，讓他無逼可裝</td>
+                    <td><a href="{{ url_for('') }}">修真聊天群</td></a>
+                    <td><a href="{{ url_for('') }}">3100.裝霸宋的逼，讓他無逼可裝</td></a>
                 </tr>
                 <tr>
-                    <td>傲嬌老公哪裡跑</td>
-                    <td>056.除非你跪下</td>
+                    <td><a href="{{ url_for('') }}">傲嬌老公哪裡跑</td></a>
+                    <td><a href="{{ url_for('') }}">056.除非你跪下</td></a>
                 </tr>
             </tbody>
             <tfoot>
@@ -183,5 +97,10 @@
         </table>
         </form>
     </div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+    <script src="SortBy.js">
+    </script> 
 </body>
 </html>

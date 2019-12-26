@@ -6,98 +6,7 @@
       <title>尼蠔一絲閱讀器</title>
       <link rel="icon" href="icon128.ico" type="image/x-icon">
       <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
-      <style type = "text/css">
-      *{
-        font-family: 'Noto Serif TC', serif;
-      }
-        body{
-            background-color: #e1dcd9;
-            color: #A67F78;
-        }
-        #divvv{
-            width: 40%;
-            margin: 0px auto;
-            border: 3pt solid;
-            text-align: center;
-            font-size: 25px;
-        }
-        #tt
-        {
-            font-size:35px;
-        }
-        .in{
-            float: left;
-            margin-left: 10%;
-        }
-        input{
-            width: 90%;
-            height: 30px; font-size: 25px;
-            color: #A67F78;
-            border: #A67F78 1px solid;
-        }
-        .message
-        {
-            padding-left: 5%;
-            text-align: left;
-            color: red;
-        }
-        img{
-            height: 60%;
-            width: 60%;
-        }
-        .check{
-            /*visibility: hidden;*/
-            float: left;
-            width: auto;
-            height: auto;
-            margin-top: 10px;
-            margin-left: 5%;
-        }
-        input:focus{
-            outline: 1px #A67F78 solid;
-        }
-        /*
-        .check+label{
-            float: left;
-            width: auto;
-            height: auto;
-            margin-top: 3%;
-            margin-left: 5%;
-            cursor: pointer;
-            background: black;
-            position: absolute;
-        }
-        .check:checked+label::before{
-            display: block;
-            content: "\2714";
-            text-align: center;
-            font-size: 16px;
-            color: white;
-        }*/
-        .sub{
-            float: none;
-            width: 100px;
-            height: auto;
-            border: 0px;
-            background-color: whitesmoke;
-        }
-        .sub:hover{
-            background-color: #F1E0D6;
-        }
-        .sub:focus{
-            outline: 1px #A67F78 solid;
-        }
-        a{
-            color: #A67F78;
-            text-decoration: none;
-        }
-        /* a:hover{
-        } */
-        a:visited{
-            color: #A67F78;
-            text-decoration: none;
-        }
-     </style>
+      <link rel= "stylesheet" href= "indexMain.css">
 
    </head>
    <body>
@@ -132,9 +41,6 @@
                 </label><br>
                 <label>
                 <input type="checkbox" class="check" name="rememberMe">
-                <!--
-                <input type="checkbox" class="check" value="#F1E0D6" id="rememberMe" checked>
-                    <label for="rememberMe"></label>-->
                 <span style= "float: left;">記住我</span><br><br>
                 </label>
                 <input type="button" value="註冊" class="sub" onclick="{{url_for('register')}}">

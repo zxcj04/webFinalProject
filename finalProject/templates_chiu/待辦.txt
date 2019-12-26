@@ -12,3 +12,15 @@ nav{
             height: (screen.height-300)px;
 }
 
+3.
+RWD
+
+備註:
+1.
+用到ㄉ圖片*href*
+第7行icon
+<link rel="icon" href="icon128.ico" type="image/x-icon">
+
+body第一部分*src*
+logo
+<img src= "logo.png">
