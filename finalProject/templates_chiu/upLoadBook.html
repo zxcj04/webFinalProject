@@ -4,56 +4,70 @@
 <head>
     <meta charset = "utf-8">
     <title>尼蠔~ 上傳</title>
-    <link rel="icon" href="icon128.ico" type="image/x-icon">
+    <link rel="icon" href="./static/icon128.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
-    <link rel= "stylesheet" href= "myBookCaseMain.css">
-    <link rel= "stylesheet" href= "SortBy.css">
-    <link rel= "stylesheet" href= "upLoadBook.css">
+    <link rel= "stylesheet" href= "./static/upLoad.css">
+    <link rel= "stylesheet" href= "./static/upLoadSort.css">
+    <link rel= "stylesheet" href= "./static/upLoadBook.css">
+    <link rel= "stylesheet" href= "https://raw.githubusercontent.com/daneden/animate.css/master/animate.css">
 </head>
 
 <body>
     <a href={{ url_for('index') }}> 
-        <img src= "logo.png">
+        <img src= "./static/logo.png">
     </a>
     <div id = "tt">
         <br><br><br><br>&nbsp&nbsp尼蠔~ 上傳
         <span style="float: right; margin-right: 3%;">
-            <a href="{{ url_for('') }}">
-                 Username  <!-- {{ current_user.id }} -->
-            </a>
-            <input type="button" value="登出" class="sub">
+            <a href="{{ url_for('') }}">Username&nbsp&nbsp  <!-- {{ current_user.id }} --></a>
+            <input type="button" value="登出" class="inputButton">
         </span>
     </div>
     <hr width="100%">
     <br>
     <div id= "divvv">
-        <br>
-        <form method="POST" action={{ url_for('') }}>
-            <div class="input-file-container">  
-                <input class="input-file" id="my-file" type="file">
-                <label tabindex="0" for="my-file" class="input-file-trigger">Select a txt...</label>
-            </div>
-            <p class="file-return"></p>
-            
-            <br>
+            <form method="POST" action={{ url_for('') }}>
+                <br>
                 <div class="center">
-                    <select name="mybook" id="myBook" class="custom-select sources" placeholder="書架">
-                        <option value="recent" name="recentbook">權寵天下</option>
-                        <option value="longest" name="longestbook">小姨的秘密</option>
-                        <option value="favorite" name="favoritebook">酒神(陰陽冕)</option>
-                        <option value="notEnd" name="notEndbook">修真聊天群</option>
-                        <option value="byName" name="byNamebook">傲嬌老公哪裡跑</option>
+                    <select name="mybook" id="myBook" class="custom-select sources" placeholder="選一本書">
+                        <option value="" name="recentbook">權寵天下</option>
+                        <option value="" name="longestbook">小姨的秘密</option>
+                        <option value="" name="favoritebook">酒神(陰陽冕)</option>
+                        <option value="" name="notEndbook">修真聊天群</option>
+                        <option value="" name="byNamebook">傲嬌老公哪裡跑</option>
                     </select>
                 </div>
                 <br><br>
-        </form>
-    </div>
+                <div class="input-file-container">  
+                    <input class="input-file" id="my-file" type="file">
+                    <label tabindex="0" for="my-file" class="input-file-trigger">Select a txt...</label>
+                </div>
+
+                <p class="file-return"></p>
+    
+                <div style="position: relative; margin-top: 20px; left: 20%">
+                    <button type="submit" class="sub">上傳</button type="submit">
+                </div>
+    
+                <br>
+            </form>
+        </div>
+        <br>
+        <footer>
+            <hr width="100%">
+            <p style="text-align: center;">
+                <br>Copyright&nbsp©<br>
+                2019 NTOU CS 2A<br>
+                00757015&nbspChiu + 00757051&nbspHuang<br>
+                - Look who's talking! -
+            </p>
+        </footer>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>
-    <script src="SortBy.js">
+    <script src="./static/SortBy.js">
     </script> 
-    <script src="upLoadBook.js">
+    <script src="./static/upLoadBook.js">
     </script> 
 </body>
 </html>

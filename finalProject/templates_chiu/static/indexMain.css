@@ -43,12 +43,12 @@
             color: red;
         }
         img{
-            height: 60%;
-            width: 60%;
+            height: 50%;
+            width: 50%;
         }
         img:hover{
-            height: 80%;
-            width: 80%;
+            height: 75%;
+            width: 75%;
         }
         .check{
             float: left;
@@ -173,12 +173,14 @@
             font-size: 25px;
         }
         .closebtn{
-            display: none;
-            border: 0px;
-            width: auto;
             font-size: larger;
             font-weight: bolder;
             position: absolute;
             top: 5px;
             right: 15px;
+        }
+        hr{
+            border:0px;
+            background-color: #A67F78;
+            height: 3px;
         }

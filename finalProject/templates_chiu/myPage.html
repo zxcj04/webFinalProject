@@ -4,31 +4,19 @@
 <head>
     <meta charset = "utf-8">
     <title>尼蠔一絲閱讀</title>
-    <link rel="icon" href="icon128.ico" type="image/x-icon">
+    <link rel="icon" href="./static/icon128.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
-    <link rel= "stylesheet" href= "myPageMain.css">
+    <link rel= "stylesheet" href= "./static/myPageMain.css">
 </head>
 
 <body>
     <a href={{ url_for('index') }}> 
-        <img src= "logo.png">
+        <img src= "./static/logo.png">
     </a>
     <span id = "tt">
         <br><br>&nbsp&nbsp&nbsp尼蠔一絲閱讀<br><br>
     </span>
     <div id="navPart">
-        <nav>
-            權寵天下
-        </nav>
-        <nav>
-            小姨的秘密
-        </nav>
-        <nav>
-            酒神(陰陽冕)
-        </nav>
-        <nav>
-            修真聊天群
-        </nav>
         <nav>
             傲嬌老公哪裡跑
         </nav>
@@ -42,17 +30,19 @@
         </div>
         <div style="padding-top: 10px; text-align:center">
             <input type="button" value="◀" class="feature" id="preChap">
-            <input type="button" value="☖" class="feature" id="goHome">
             <input type="button" value="－" class="feature" id="fontSmall">
             <input type="button" value="☰" class="feature" id="menu">
             <input type="button" value="＋" class="feature" id="fontBig">
-            <input type="button" value="★" class="feature" id="addLike">
             <input type="button" value="▶" class="feature" id="postChap">
         </div>
+        <!-- <div style="padding-top: 10px; text-align:center">
+            <input type="button" value="☖" class="feature" id="goHome">
+        </div> -->
     </div>
+    
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>
-    <script src="myPageMain.js">
+    <script src="./static/myPageMain.js">
     </script> 
 </body>
 </html>

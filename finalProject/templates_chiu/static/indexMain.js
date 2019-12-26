@@ -18,10 +18,9 @@ $("button").click(function(){
     $(this).css("border-radius", "50%");
     $(this).css("background-color", "whitesmoke");
     $(this).css("color", "#A67F78");
-    $(this).css("border", "3px #A67F78 solid");
-    // setTimeout(function(){
-    //     //do something special
-    // }, 5000);
+    $(this).css("border", "3px #A67F78 solid").delay(3000);
+    //set time out
+    //$(this)submit();
 });
 
 $("img").hover(function(){

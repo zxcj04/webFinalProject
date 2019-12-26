@@ -13,6 +13,9 @@ button.addEventListener( "click", function( event ) {
    fileInput.focus();
    return false;
 });  
-fileInput.addEventListener( "change", function( event ) {  
-    the_return.innerHTML = this.value;  
+fileInput.addEventListener( "change", function( event ) { 
+    var str= this.value;
+    str= str.substring(12, str.length);
+    the_return.innerHTML = "<br>"+str;  
 });  
+

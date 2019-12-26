@@ -4,10 +4,10 @@
    <head>
       <meta charset = "utf-8">
       <title>尼蠔一絲閱讀器</title>
-      <link rel="icon" href="icon128.ico" type="image/x-icon">
+      <link rel="icon" href="./static/icon128.ico" type="image/x-icon">
       <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link rel= "stylesheet" href= "indexMain.css">
+      <link rel= "stylesheet" href= "./static/indexMain.css">
 
    </head>
    <body>
@@ -15,7 +15,7 @@
        <div id = "divvv">
            <form method="POST" action={{ url_for('login') }}>
                <a href={{ url_for('index') }}> 
-                   <img src= "logo.png"></img>
+                   <img src= "./static/logo.png"></img>
                 </a>
                 <br>
                 <span id = "tt">
@@ -48,23 +48,23 @@
                 <input type="checkbox" class="check" name="rememberMe">
                 <span style= "float: left;">記住我</span><br>
                 <div style="position: relative; margin-top: 20px; height: 50px">
-                    <input type="button" value="註冊" class="inputButton" onclick="{{url_for('register')}}">
+                    <input type="button" value="註冊" class="inputButton">
                     <button type="submit" class="sub">登入</button>
                 </div>
            </form>
        </div>
 
        <div id= "regdiv">
-            <button class="closebtn" id="closeBtn">
-                ✖
-            </button>
+            <span class="closebtn">
+                <a href="#">✖</a>
+            </span>
         <form method="POST" action={{ url_for('register') }}>
             <table style= "width: 100%;">
                 <thead>
                     <tr id="regtt">
                         <td width=50%>
                             <a href={{ url_for('index') }}> 
-                            <img src= "logo.png"></a>
+                            <img src= "./static/logo.png"></a>
                         </td>
                         <td style="padding-top: 10%; padding-right: 5%; padding-left: 10%; text-align: left;">尼蠔一絲<br>&nbsp&nbsp&nbsp註冊</td>
                     </tr>
@@ -137,7 +137,7 @@
 
        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
        </script>
-       <script src="indexMain.js">
+       <script src="./static/indexMain.js">
        </script>
     </body>
 </html>
