@@ -7,6 +7,8 @@ app = Flask(__name__)
 app.secret_key = 'Your Key'  
 login_manager = LoginManager(app)  
 
+available_filename = []
+
 class User(UserMixin):    
     pass  
 
@@ -220,11 +222,35 @@ def upload_file():
             flash("success upload \"" + file.filename + "\"")
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            
+
             return redirect(url_for('upload_file'))
 
     return render_template("upload.html")
 
+def transformTxT(filename):
+
+    with open("tmp/" + filename, "r") as fp:
+
+        ori = fp.readlines()
+
+    print(ori)
+
+    first = "\""
+    replacement = "\", \""
+    last = "\""
+
+    ori = replacement.join(ori)
+
+    ori = first + ori.replace("\n", "") + last
+
+    ori = ori.replace("\"\", ", "")
+
+    return ori
+
 if __name__ == '__main__':
+    available_filename = list(range(100))
     app.debug = True
     app.secret_key = "MINE"
     app.run()
