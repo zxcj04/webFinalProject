@@ -173,6 +173,9 @@
             font-size: 25px;
         }
         .closebtn{
+            display: none;
+            border: 0px;
+            width: auto;
             font-size: larger;
             font-weight: bolder;
             position: absolute;

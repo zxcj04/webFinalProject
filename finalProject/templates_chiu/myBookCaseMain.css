@@ -37,7 +37,7 @@
             width: 90%;
             height: 30px; font-size: 20px;
             color: #A67F78;
-            border: #A67F78 1px solid; 
+            border: #A67F78 1px solid;
         }
         input:focus{
             outline: 1px #A67F78 solid;

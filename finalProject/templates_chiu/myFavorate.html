@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset = "utf-8">
+    <title>尼蠔一絲的愛</title>
+    <link rel="icon" href="icon128.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
+    <link rel= "stylesheet" href= "myBookCaseMain.css">
+    <link rel= "stylesheet" href= "SortBy.css">
+    
+</head>
+
+<body>
+    <a href={{ url_for('index') }}> 
+        <img src= "logo.png">
+    </a>
+    <div id = "tt">
+        <br><br><br><br>&nbsp&nbsp尼蠔~ 一絲的愛
+        <span style="float: right; margin-right: 3%;">
+            <a href="{{ url_for('') }}">
+                 Username  <!-- {{ current_user.id }} -->
+            </a>
+            <input type="button" value="登出" class="sub">
+        </span>
+    </div>
+    <hr width="100%">
+    <br>
+    <div id= "divvv">
+        <hr width="100%" style="height: 0px;">
+        <form method="POST" action={{ url_for('') }}>
+        <table style="width: 100%">
+            <caption>
+                愛ㄉ章節
+            </caption>
+            <thead>
+                <tr>
+                    <td colspan="2">
+                        <hr width="100%">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right">
+                        <div class="center">
+                            <select name="loveChapSrc" id="loveChapSrc" class="custom-select sources" placeholder="最近閱讀">
+                                <option value="recent">最近閱讀</option>
+                                <option value="longest">最舊閱讀</option>
+                                <option value="byName">名稱</option>
+                                <option value="favorite">我的最愛</option>
+                                <option value="notEnd">未讀完</option>
+                            </select>
+                            &nbsp&nbsp
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>書籍</td>
+                    <td>章節</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="{{ url_for('') }}">權寵天下</td></a>
+                    <td><a href="{{ url_for('') }}">747.沒希望了</td></a>
+                </tr>
+                <tr>
+                    <td><a href="{{ url_for('') }}">小姨的秘密</td></a>
+                    <td><a href="{{ url_for('') }}">001.行屍走肉</td></a>
+                </tr>
+                <tr>
+                    <td><a href="{{ url_for('') }}">酒神(陰陽冕)</td></a>
+                    <td><a href="{{ url_for('') }}">409.更加強烈</td></a>
+                </tr>
+                <tr>
+                    <td><a href="{{ url_for('') }}">修真聊天群</td></a>
+                    <td><a href="{{ url_for('') }}">3100.裝霸宋的逼，讓他無逼可裝</td></a>
+                </tr>
+                <tr>
+                    <td><a href="{{ url_for('') }}">傲嬌老公哪裡跑</td></a>
+                    <td><a href="{{ url_for('') }}">056.除非你跪下</td></a>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <br>
+                        <hr width="100%">
+                        <hr width="100%">
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <table style="width: 100%">
+            <caption>
+                愛ㄉ書
+            </caption>
+            <thead>
+                <tr>
+                    <td>
+                        <hr width="100%">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">
+                    <div class="center">
+                        <select name="loveBookSrc" id="loveBookSrc" class="custom-select sources" placeholder="最近閱讀">
+                            <option value="recent">最近閱讀</option>
+                            <option value="longest">最舊閱讀</option>
+                            <option value="byName">名稱</option>
+                            <option value="favorite">我的最愛</option>
+                            <option value="notEnd">未讀完</option>
+                        </select>
+                        &nbsp&nbsp<br><br>
+                    </div>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="{{ url_for('') }}">權寵天下</td></a>
+                </tr>
+                <tr>
+                    <td><a href="{{ url_for('') }}">小姨的秘密</td></a>
+                </tr>
+                <tr>
+                    <td><a href="{{ url_for('') }}">酒神(陰陽冕)</td></a>
+                </tr>
+                <tr>
+                    <td><a href="{{ url_for('') }}">修真聊天群</td></a>
+                </tr>
+                <tr>
+                    <td><a href="{{ url_for('') }}">傲嬌老公哪裡跑</td></a>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <br><br>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+    <script src="SortBy.js">
+    </script> 
+</body>
+</html>

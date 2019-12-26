@@ -47,16 +47,17 @@
 
                 <input type="checkbox" class="check" name="rememberMe">
                 <span style= "float: left;">記住我</span><br>
-                <br>
-                <input type="button" value="註冊" class="inputButton" onclick="{{url_for('register')}}">
-                <button type="submit" class="sub">登入</button>
+                <div style="position: relative; margin-top: 20px; height: 50px">
+                    <input type="button" value="註冊" class="inputButton" onclick="{{url_for('register')}}">
+                    <button type="submit" class="sub">登入</button>
+                </div>
            </form>
        </div>
 
        <div id= "regdiv">
-            <span class="closebtn">
+            <button class="closebtn" id="closeBtn">
                 ✖
-            </span>
+            </button>
         <form method="POST" action={{ url_for('register') }}>
             <table style= "width: 100%;">
                 <thead>
@@ -123,8 +124,10 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="2" style="padding-top: 20px; padding-bottom: 20px; padding-left:30%">
+                        <td colspan="2" style="padding-top: 20px; padding-bottom: 20px; padding-left:30%;">
+                            <div style="position: relative; margin-top: 20px; height: 50px">
                             <button type="submit" name= "submit" class="sub">註冊</button>
+                            </div>
                         </td>
                     </tr>
                 </tfoot>

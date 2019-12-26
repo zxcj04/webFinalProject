@@ -13,7 +13,7 @@ $("button").click(function(){
     $(this).css("height", "70px");
     $(this).text("✔");
     $(this).css("left", "40%");
-    $(this).css("right", "");
+    $(this).css("position", "absolute");
     $(this).css("top", "-20px");
     $(this).css("border-radius", "50%");
     $(this).css("background-color", "whitesmoke");
