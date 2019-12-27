@@ -78,7 +78,7 @@ def login_check(ac, pa):
     else:
         return 2
 
-@app.route("/bookshelf")
+@app.route("/bookshelf", methods=["GET", "POST"])
 @login_required
 def bookshelf():
 
@@ -86,9 +86,16 @@ def bookshelf():
 
     books = db["books"]
 
-    myBooks = user["books"]
+    which = user["books"]
 
-    return render_template('myBookCase.html', account=current_user.id, books=myBooks)
+    there = 0
+    
+    if request.method == 'POST':
+        if request.form["sources"] == "byName":
+            which = sorted(which)
+            there = 1
+
+    return render_template('myBookCase.html', account=current_user.id, books=which, there=there)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -179,6 +186,16 @@ def in_page(bookName, number):
 
     if bookName not in user["books"]:
         return redirect(url_for("bookshelf"))
+
+    predel = user["books"]
+
+    predel.remove(bookName)
+
+    recent = [bookName]
+
+    recent.extend(predel)
+
+    users.update_one( { "id" : current_user.id }, { "$set" : { "books" : recent } } )
 
     books = db["books"]
     pages = db["pages"]
