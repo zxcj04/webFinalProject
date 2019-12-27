@@ -8,13 +8,14 @@
 </head>     
 
 <body>
-    <form action="#">
-        <div class="input-file-container">  
-          <input class="input-file" id="my-file" type="file">
-          <label tabindex="0" for="my-file" class="input-file-trigger">Select a file...</label>
-        </div>
-        <p class="file-return"></p>
-      </form>
+
+    <div class="selectOption">
+      <select name="sortBy" class="sortBy"
+          onchange="this.form.submit();">
+          <option value="recent" selected>最近閱讀</option>
+          <option value="byName">名稱</option>
+      </select>
+    </div>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>

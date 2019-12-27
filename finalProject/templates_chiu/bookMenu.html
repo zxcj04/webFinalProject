@@ -7,7 +7,6 @@
     <link rel="icon" href="./static/icon128.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
     <link rel= "stylesheet" href= "./static/myBookCaseMain.css">
-    <link rel= "stylesheet" href= "./static/SortBy.css">
 </head>
 
 <body>
@@ -43,13 +42,12 @@
                 </tr>
                 <tr>
                     <td colspan="3"  style="text-align: right">
-                        <div class="center">
-                            <select name="sources" id="sources" class="custom-select sources"
-                                onchange="this.form.submit();" placeholder="最舊->最新">
-                                <option value="newest">最新->最舊</option>
-                                <option value="oldest">最舊->最新</option>
+                        <div class="selectOption">
+                            <select name="sortBy" class="sortBy"
+                                onchange="this.form.submit();">
+                                <option value="newest">最新至最舊</option>
+                                <option value="oldest" selected>最舊至最新</option>
                             </select>
-                            &nbsp&nbsp<br><br>
                         </div>
                     </td>
                 </tr>
@@ -106,7 +104,5 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>
-    <script src="./static/SortBy.js">
-    </script> 
 </body>
 </html>

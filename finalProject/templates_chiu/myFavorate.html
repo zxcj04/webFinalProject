@@ -7,7 +7,6 @@
     <link rel="icon" href="./static/icon128.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
     <link rel= "stylesheet" href= "./static/myBookCaseMain.css">
-    <link rel= "stylesheet" href= "./static/SortBy.css">
     
 </head>
 
@@ -42,13 +41,12 @@
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: right">
-                        <div class="center">
-                            <select name="loveChapSrc" id="loveChapSrc" class="custom-select sources"
-                            onchange="this.form.submit();" placeholder="最近閱讀">
-                                <option value="recent">最近閱讀</option>
+                        <div class="selectOption">
+                            <select name="sortBy" class="sortBy"
+                                onchange="this.form.submit();">
+                                <option value="recent" selected>最近閱讀</option>
                                 <option value="byName">名稱</option>
                             </select>
-                            &nbsp&nbsp
                         </div>
                     </td>
                 </tr>
@@ -142,7 +140,5 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>
-    <script src="./static/SortBy.js">
-    </script> 
 </body>
 </html>
