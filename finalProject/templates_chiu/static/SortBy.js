@@ -33,3 +33,5 @@ $(".custom-select").each(function() {
     $(this).parents(".custom-select").removeClass("opened");
     $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
   });
+
+  // $("#sources option[value=recent]").attr("selected", "selected");

@@ -123,6 +123,7 @@
             background-color: #F1E0D6;
         }
 
+
 .eyeType{
     background-color: RGB(168,178,158);
     color: black;
@@ -139,179 +140,207 @@
     background-color: #FFFFFF;
     color: #7AC943;
 }
-.white{
+.whiteindigo{
     background-color: #FFFFFF;
     color: #00A99D;
 }
-.white{
+.whiteblue{
     background-color: #FFFFFF;
     color: #3FA9F5;
 }
-.white{
+.whitepurple{
     background-color: #FFFFFF;
     color: #93278F;
 }
-.white{
+.whitepink{
     background-color: #FFFFFF;
     color: #FF7BAC;
 }
-.white{
+.whitered{
     background-color: #FFFFFF;
     color: #FF1D25;
 }
-.white{
+.whiteorange{
     background-color: #FFFFFF;
     color: #FF931E;
 }
-.white{
+.blackwhite{
     background-color: #000000;
     color: #FFFFFF;
 }
-.nightType{
+.blackgreen{
     background-color: #000000;
     color: #7AC943;
 }
-.nightType{
+.blackindigo{
     background-color: #000000;
     color: #00A99D;
 }
-.black{
+.blackblue{
     background-color: #000000;
     color: #3FA9F5;
 }
-.black{
+.blackpurple{
     background-color: #000000;
     color: #93278F;
 }
-.black{
+.blackpink{
     background-color: #000000;
     color: #FF7BAC;
 }
-.black{
+.blackred{
     background-color: #000000;
     color: #FF1D25;
 }
-.black{
+.blackorange{
     background-color: #000000;
     color: #FF931E;
 }
-.nightType{
+.whitegray{
     background-color: #E6E6E6;
     color: #333333;
 }
-.black{
+.greenblack{
     background-color: #7AC943;
     color: #000000;
 }
-.black{
+.indigoblack{
     background-color: #00A99D;
     color: #000000;
 }
-.black{
+.blueblack{
     background-color: #3FA9F5;
     color: #000000;
 }
-.black{
+.purpleblack{
     background-color: #93278F;
     color: #000000;
 }
-.black{
+.pinkblack{
     background-color: #FF7BAC;
     color: #000000;
 }
-.black{
+.redblack{
     background-color: #FF1D25;
     color: #000000;
 }
-.black{
+.orangeblack{
     background-color: #FF931E;
     color: #000000;
 }
-.nightType{
+.graywhite{
     background-color: #333333;
     color: #E6E6E6;
 }
-.white{
+.greenwhite{
     background-color: #7AC943;
     color: #FFFFFF;
 }
-.white{
+.indigowhite{
     background-color: #00A99D;
     color: #FFFFFF;
 }
-.white{
+.bluewhite{
     background-color: #3FA9F5;
     color: #FFFFFF;
 }
-.white{
+.purplewhite{
     background-color: #93278F;
     color: #FFFFFF;
 }
-.white{
+.pinkwhite{
     background-color: #FF7BAC;
     color: #FFFFFF;
 }
-.white{
+.redwhite{
     background-color: #FF1D25;
     color: #FFFFFF;
 }
-.white{
+.orangewhite{
     background-color: #FF931E;
     color: #FFFFFF;
 }
-.nightType{
+.bluegray{
     background-color: #BDCCD4;
     color: #534741;
 }
-.nightType{
+.preetygreen{
     background-color: #E2EDC1;
     color: #00A055;
 }
-.nightType{
+.justblue{
     background-color: #C9F2EE;
     color: #0000FF;
 }
-.nightType{
+.preetyblue{
     background-color: #C8EAF5;
     color: #00AEEF;
 }
-.nightType{
+.preetypurple{
     background-color: #D8D6EC;
     color: #702C8D;
 }
-.nightType{
+.preetypink{
     background-color: #FCE3EE;
     color: #F190AC;
 }
-.nightType{
+.preetybrown{
     background-color: #EEDFAC;
     color: #534741;
 }
-.nightType{
+.preetyorange{
     background-color: #FFFAC0;
     color: #F4783B;
 }
-.nightType{
+.preetydarkblue{
     background-color: #E1E9F2;
     color: #004080;
 }
-.nightType{
+.preetyindigo{
     background-color: #EAF3E0;
     color: #008080;
 }
-.white{
+.darkgreenwhite{
     background-color: #004040;
     color: #FFFFFF;
 }
-.nightType{
+.pinkpurple{
     background-color: #FAC8D3;
     color: #895881;
 }
-.nightType{
+.redyellow{
     background-color: #C1172C;
     color: #FFF200;
 }
-.black{
+.orangetwoblack{
     background-color: #FF8040;
     color: #000000;
+}
+.webcolor{
+    background-color: #e1dcd9;
+    color: #A67F78;
+}
+.origin{
+    background-color: #e1dcd9;
+    color: #370D00;
+}
+.yellowindigo{
+    background-color: #eecb27;
+    color: #1f1762;
+}
+.coral{
+    background-color: #ffbdb0;
+    color: #bb496b;
+}
+.graygray{
+    background-color: #d3d6c3;
+    color: #5a5c4f;
+}
+.bone{
+    background-color: #dfe4de;
+    color: #525e76;
+}
+.bakery{
+    background-color: #fbd1a7;
+    color: #642a02;
 }

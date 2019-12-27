@@ -7,7 +7,7 @@
     <link rel="icon" href="./static/icon128.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
     <link rel= "stylesheet" href= "./static/myBookCaseMain.css">
-    
+    <link rel= "stylesheet" href= "./static/SortBy.css">
 </head>
 
 <body>
@@ -19,9 +19,10 @@
         <span name= "book">書名</span>
         <span style="float: right; margin-right: 3%;">
             <a href="{{ url_for('') }}">
-                 Username  <!-- {{ current_user.id }} -->
+                <span name= "userid">Username</span>
             </a>
-            <input type="button" value="登出" class="sub">
+            <input type="button" value="登出" class="sub" 
+            onclick="location.href = '{{ url_for('logout') }}'">
         </span>
     </div>
     <hr width="100%">
@@ -38,6 +39,18 @@
                 <tr>
                     <td colspan="3">
                         <hr width="100%">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3"  style="text-align: right">
+                        <div class="center">
+                            <select name="sources" id="sources" class="custom-select sources"
+                                onchange="this.form.submit();" placeholder="最舊->最新">
+                                <option value="newest">最新->最舊</option>
+                                <option value="oldest">最舊->最新</option>
+                            </select>
+                            &nbsp&nbsp<br><br>
+                        </div>
                     </td>
                 </tr>
             </thead>
@@ -93,5 +106,7 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>
+    <script src="./static/SortBy.js">
+    </script> 
 </body>
 </html>

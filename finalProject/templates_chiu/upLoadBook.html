@@ -19,8 +19,11 @@
     <div id = "tt">
         <br><br><br><br>&nbsp&nbsp尼蠔~ 上傳
         <span style="float: right; margin-right: 3%;">
-            <a href="{{ url_for('') }}">Username&nbsp&nbsp  <!-- {{ current_user.id }} --></a>
-            <input type="button" value="登出" class="inputButton">
+            <a href="{{ url_for('') }}">
+                <span name= "userid">Username</span>&nbsp&nbsp
+            </a>
+            <input type="button" value="登出" class="inputButton"
+                onclick="location.href = '{{ url_for('logout') }}'">
         </span>
     </div>
     <hr width="100%">
@@ -29,12 +32,13 @@
             <form method="POST" action={{ url_for('') }}>
                 <br>
                 <div class="center">
-                    <select name="mybook" id="myBook" class="custom-select sources" placeholder="選一本書">
-                        <option value="" name="recentbook">權寵天下</option>
-                        <option value="" name="longestbook">小姨的秘密</option>
-                        <option value="" name="favoritebook">酒神(陰陽冕)</option>
-                        <option value="" name="notEndbook">修真聊天群</option>
-                        <option value="" name="byNamebook">傲嬌老公哪裡跑</option>
+                    <select name="mybook" id="myBook" class="custom-select sources"
+                    onchange="this.form.submit();" placeholder="選一本書">
+                        <option>權寵天下</option>
+                        <option>小姨的秘密</option>
+                        <option>酒神(陰陽冕)</option>
+                        <option>修真聊天群</option>
+                        <option>傲嬌老公哪裡跑</option>
                     </select>
                 </div>
                 <br><br>

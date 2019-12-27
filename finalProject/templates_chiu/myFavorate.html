@@ -19,9 +19,10 @@
         <br><br><br><br>&nbsp&nbsp尼蠔~ 一絲的愛
         <span style="float: right; margin-right: 3%;">
             <a href="{{ url_for('') }}">
-                 Username  <!-- {{ current_user.id }} -->
+                <span name= "userid">Username</span>
             </a>
-            <input type="button" value="登出" class="sub">
+            <input type="button" value="登出" class="sub" 
+            onclick="location.href = '{{ url_for('logout') }}'">
         </span>
     </div>
     <hr width="100%">
@@ -42,12 +43,10 @@
                 <tr>
                     <td colspan="2" style="text-align: right">
                         <div class="center">
-                            <select name="loveChapSrc" id="loveChapSrc" class="custom-select sources" placeholder="最近閱讀">
+                            <select name="loveChapSrc" id="loveChapSrc" class="custom-select sources"
+                            onchange="this.form.submit();" placeholder="最近閱讀">
                                 <option value="recent">最近閱讀</option>
-                                <option value="longest">最舊閱讀</option>
                                 <option value="byName">名稱</option>
-                                <option value="favorite">我的最愛</option>
-                                <option value="notEnd">未讀完</option>
                             </select>
                             &nbsp&nbsp
                         </div>
@@ -99,20 +98,6 @@
                 <tr>
                     <td>
                         <hr width="100%">
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: right">
-                    <div class="center">
-                        <select name="loveBookSrc" id="loveBookSrc" class="custom-select sources" placeholder="最近閱讀">
-                            <option value="recent">最近閱讀</option>
-                            <option value="longest">最舊閱讀</option>
-                            <option value="byName">名稱</option>
-                            <option value="favorite">我的最愛</option>
-                            <option value="notEnd">未讀完</option>
-                        </select>
-                        &nbsp&nbsp<br><br>
-                    </div>
                     </td>
                 </tr>
             </thead>
