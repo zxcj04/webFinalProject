@@ -11,7 +11,7 @@ $("button").click(function(){
     $(this).css("transition", "all 0.5s");
     $(this).css("width", "70px");
     $(this).css("height", "70px");
-    $(this).text("✔");
+    $(this).text("\u2714");
     $(this).css("left", "40%");
     $(this).css("position", "absolute");
     $(this).css("top", "-20px");
