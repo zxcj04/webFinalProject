@@ -33,6 +33,20 @@
     {%endif%}
     {% endwith %}
 
+    <form action="{{ url_for('bookshelf') }}" method="POST">
+        <select name="sources" id="sources" class="custom-select sources" value="排序...">
+            {% if there == 1 %}
+                <option value="byName">名稱</option>
+            {% endif %}
+            <option value="recent">最近閱讀</option>
+            {% if there == 0 %}
+                <option value="byName">名稱</option>
+            {% endif %}
+        </select>
+
+        <input type="submit" value="✓">
+    </form>
+
     <p id="account">{{account}}</p>
 
     <ul id="bookshelf">
