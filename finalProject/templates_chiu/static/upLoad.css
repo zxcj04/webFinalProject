@@ -129,4 +129,23 @@
         background-color: #F1E0D6;
         font-weight: bold;
     }
-    
+    .selectOption{
+        width: 100%;
+        height: auto;
+    }
+    .sortBy{
+        background-color: whitesmoke;
+        color: #A67F78;
+        border: 0px;
+        /* width: 30%; */
+        padding: 3px 7px 3px 7px;
+        margin-right: 5%;
+        margin-bottom: 2%;
+        font-size: inherit;
+      }
+      .sortBy:focus{
+        outline: #A67F78 0px solid;
+      }
+      .sortBy:hover{
+        box-shadow: 3px 3px 3px #A67F78;
+      }

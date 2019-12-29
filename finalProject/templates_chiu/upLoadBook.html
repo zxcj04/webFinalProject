@@ -7,7 +7,6 @@
     <link rel="icon" href="./static/icon128.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
     <link rel= "stylesheet" href= "./static/upLoad.css">
-    <link rel= "stylesheet" href= "./static/upLoadSort.css">
     <link rel= "stylesheet" href= "./static/upLoadBook.css">
     <link rel= "stylesheet" href= "https://raw.githubusercontent.com/daneden/animate.css/master/animate.css">
 </head>
@@ -28,12 +27,12 @@
     </div>
     <hr width="100%">
     <br>
-    <div id= "divvv">
+    <!-- <div id= "divvv"> -->
             <form method="POST" action={{ url_for('') }}>
                 <br>
-                <div class="center">
-                    <select name="mybook" id="myBook" class="custom-select sources"
-                    onchange="this.form.submit();" placeholder="選一本書">
+                <div class="selectOption">
+                    <select name="mybook" class="sortBy"
+                    onchange="this.form.submit();">
                         <option>權寵天下</option>
                         <option>小姨的秘密</option>
                         <option>酒神(陰陽冕)</option>
@@ -69,8 +68,6 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>
-    <script src="./static/SortBy.js">
-    </script> 
     <script src="./static/upLoadBook.js">
     </script> 
 </body>
