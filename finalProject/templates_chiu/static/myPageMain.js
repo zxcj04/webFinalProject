@@ -1,4 +1,5 @@
 var colorShow= 0;
+var screenWhole= 0;
 function start(){
     var bookdiv= document.getElementById("divvv");
     var h= screen.clientHeight/ 2;
@@ -6,9 +7,8 @@ function start(){
 }
 
 $("#menu").click(function(){
-    $("#firstmenu").fadeOut("slow", function(){
-        $("#secondmenu").slideDown("slow");
-    });
+    $("#firstmenu").slideUp("slow");
+    $("#secondmenu").slideDown("slow");
 });
 
 $("#closebtn").click(function(){
@@ -17,8 +17,8 @@ $("#closebtn").click(function(){
         $("#colorPart").hide("fast");
         colorShow= 0;
     }
-    $("#firstmenu").slideDown("slow");
-    $("#secondmenu").slideUp("slow");
+    $("#firstmenu").show("slow");
+    $("#secondmenu").hide("slow");
 });
 
 $(".adjust").click(function(){
@@ -48,11 +48,23 @@ $("#wholeScreen").click(function(){
         colorShow= 0;
         $("#changeColor").removeClass("selected");
     }
-    $(".elsePart").hide();
-    $("#firstmenu").show();
-    $("#secondmenu").hide();
-    $("#smallScreen").show();
-    $("#divvv").toggleClass("whole");
+    if(screenWhole== 1){
+        $("#smallScreen").hide();
+        $(".elsePart").show();
+        $("#firstmenu").show();
+        $("#secondmenu").hide();
+        $("#divvv").removeClass("whole");
+        $(".adjust").removeClass("selected");
+        screenWhole= 0;
+    }
+    else{
+        $(".elsePart").hide();
+        $("#firstmenu").show();
+        $("#secondmenu").hide();
+        $("#smallScreen").show();
+        $("#divvv").toggleClass("whole");
+        screenWhole= 1;
+    }
 });
 
 $("#smallScreen").click(function(){
@@ -61,6 +73,7 @@ $("#smallScreen").click(function(){
     $("#firstmenu").show();
     $("#divvv").removeClass("whole");
     $(".adjust").removeClass("selected");
+    screenWhole= 0;
 });
 
 $("#fontSmall").click(function(){
