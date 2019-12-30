@@ -1,5 +1,8 @@
 # 網程期末專案
 
+## 投影片
+* [在這https://docs.google.com/presentation/d/1HGsZPgq4EVZPWDFSDNRn9g7iQ7AHLcOtbHqQHQ84JDw/edit?usp=sharing](https://docs.google.com/presentation/d/1HGsZPgq4EVZPWDFSDNRn9g7iQ7AHLcOtbHqQHQ84JDw/edit?usp=sharing)
+
 ## 學習區
 ### 先學習Git Vim可用可不用 碰到問題去看看
 * [Git入門](https://backlog.com/git-tutorial/tw/)
