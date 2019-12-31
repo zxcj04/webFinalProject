@@ -1,9 +1,0 @@
-.sortBy{
-  background-color: whitesmoke;
-  color: #A67F78;
-  border: 0px;
-  height: 30%;
-}
-.sortBy:focus{
-  outline: #A67F78 1px solid;
-}
