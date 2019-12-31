@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset = "utf-8">
+    <title>目錄: {{ bookName }}</title>
+    <link rel="icon" href="{{ url_for('static', filename='icon128.ico') }}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
+    <link rel= "stylesheet" href= "{{ url_for('static', filename='myBookCaseMain.css') }}">
+</head>
+
+<body>
+    <a href={{ url_for('index') }}> 
+        <img src= "{{ url_for('static', filename='logo.png') }}">
+    </a>
+    <div id = "tt">
+        <br><br><br><br>&nbsp&nbsp目錄: &nbsp
+        <span name= "book">{{ bookName }}</span>
+        <span style="float: right; margin-right: 3%;">
+            <a href="{{ url_for('bookshelf') }}">
+                <span name= "userid">{{ current_user.id }}</span>
+            </a>
+            <input type="button" value="登出" class="sub" 
+            onclick="location.href = '{{ url_for('logout') }}'">
+        </span>
+    </div>
+    <hr width="100%">
+    <br>
+    <div id= "divvv">
+        <hr width="100%" style="height: 0px;">
+        <form method="POST" action="/">
+        <table style="width: 100%">
+            <caption>
+                &nbsp&nbsp目錄: &nbsp
+                <span name= "book">{{ bookName }}</span>
+            </caption>
+            <thead>
+                <tr>
+                    <td colspan="3">
+                        <hr width="100%">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3"  style="text-align: right">
+                        <div class="selectOption">
+                            <select name="sortBy" class="sortBy"
+                                onchange="get_data()" id="select">
+                                <option value="newest">最新至最舊</option>
+                                <option value="oldest" selected>最舊至最新</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+            <tbody style="text-align: left;" id="aj">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <hr width="100%">
+                        <br>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        </form>
+    </div>
+
+    <br>
+    <footer>
+        <hr width="100%">
+        <p style="text-align: center;">
+            <br>Copyright&nbsp&copy<br>
+            2019 NTOU CS 2A<br>
+            00757015&nbspChiu + 00757051&nbspHuang<br>
+            - Look who's talking! -
+        </p>
+    </footer>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+    <script>
+
+        var pageNumbers = [];
+        var pageName = [];
+
+        $(document).ready(function(){
+            get_data();
+        });
+
+        function get_data()
+        {
+            var sources = document.getElementById("select").value;
+            var bookName = "{{ bookName }}";
+
+            $("#aj").empty();
+
+            $("#aj").append("<tr class='pages' id='tr'></tr>");
+            $("#tr").append("<td>載入中</td>");
+            $("#tr").append("<td>載入中</td>");
+            $("#tr").append("<td>載入中</td>");
+
+            $.ajax({
+                url:"{{ url_for('update_book') }}",
+                type:"post",
+                contentType:"application/json",
+                data: JSON.stringify({"sources": sources, "bookName" : bookName}),
+                dataType: 'json',
+                processData:false,
+                success:function(data){
+                    pageNumbers = data.pageNumbers;
+                    pageName = data.pageName;
+
+                    $("#aj").empty();
+
+                    /*
+                    <tr>
+                        <td><a>第210章 閉關久長痔瘡怎么辦?</td></a>
+                        <td><a>第214章 愛飆飛劍的御劍大賽冠軍</td></a>
+                        <td><a>第231章 屎都打出來啊</td></a>
+                    </tr>
+                    */
+
+                    $.each(pageNumbers, function(i, ele){
+                        console.log(i);
+                        if( i % 3 == 0 )
+                        {
+                            $("#aj").append("<tr class='pages' id='tr" + (i / 3) + "'></tr>");
+                        }
+
+                        $("#tr" + parseInt(i / 3)).append("<td><a href='/book/" + bookName + "/"+ pageNumbers[i] + "'>" + "第" + parseInt(pageNumbers[i]) + "章 " + pageName[i] + "</a></td>");
+                    });
+
+                    if(pageNumbers.length % 3 != 0)
+                    {
+                        var num = 3 - pageNumbers.length % 3;
+                        var wh = parseInt(pageNumbers.length / 3);
+                    
+                        while(num--)
+                        {
+                            $("#tr" + parseInt(wh)).append("<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>");
+                        }
+                    }
+                },
+                error:function(e){
+                    pageNumbers = [];
+                    pageName = [];
+                }
+            });   
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset = "utf-8">
+    <title>尼蠔~ 上傳</title>
+    <link rel="icon" href="{{ url_for('static', filename='icon128.ico') }}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
+    <link rel= "stylesheet" href= "{{ url_for('static', filename='upLoad.css') }}">
+    <link rel= "stylesheet" href= "{{ url_for('static', filename='upLoadBook.css') }}">
+    <link rel= "stylesheet" href= "https://raw.githubusercontent.com/daneden/animate.css/master/animate.css">
+</head>
+
+<body>
+    <a href={{ url_for('index') }}> 
+        <img src= "{{ url_for('static', filename='logo.png') }}">
+    </a>
+    <div id = "tt">
+        <br><br><br><br>&nbsp&nbsp<a href={{ url_for('index') }}>尼蠔~ 上傳</a>
+        <span style="float: right; margin-right: 3%;">
+            <a href="{{ url_for('bookshelf') }}">
+                <span name= "userid">{{ current_user.id }}</span>&nbsp&nbsp
+            </a>
+            <input type="button" value="登出" class="inputButton"
+                onclick="location.href = '{{ url_for('logout') }}'">
+        </span>
+    </div>
+    <hr width="100%">
+    <br>
+    <!-- <div id= "divvv"> -->
+            <form method="POST" action={{ url_for('upload') }} enctype=multipart/form-data>
+                <br>
+                <div class="selectOption">
+                    <select name="mybook" class="sortBy" id="select"
+                        onchange="check()">
+                        {% for ele in books %}
+                            <option>{{ ele }}</option>
+                        {% endfor %}
+                        <option value="new">(新增一本書...)</option>
+                    </select>
+
+                    <input type="text" hidden id="newText" name="newBook">
+                </div>
+                <br><br>
+                <div class="input-file-container">  
+                    <input class="input-file" id="my-file" type="file" name="file">
+                    <label tabindex="0" for="my-file" class="input-file-trigger">Select a txt...</label>
+                </div>
+
+                <p class="file-return"></p>
+    
+                <div style="position: relative; margin-top: 20px; left: 20%">
+                    <button type="submit" class="sub">上傳</button type="submit">
+                </div>
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="message">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+    
+                <br>
+            </form>
+        </div>
+        <br>
+        <footer>
+            <hr width="100%">
+            <p style="text-align: center;">
+                <br>Copyright&nbsp&copy<br>
+                2019 NTOU CS 2A<br>
+                00757015&nbspChiu + 00757051&nbspHuang<br>
+                - Look who's talking! -
+            </p>
+        </footer>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+    <script src="{{ url_for('static', filename='upLoadBook.js') }}">
+    </script> 
+
+    <script>
+
+        $(document).ready(function(){
+            check();
+        })
+        
+        function check()
+        {
+            if(document.getElementById("select").value == "new")
+            {
+                $("#newText").show();
+            }
+            else
+            {
+                $("#newText").hide();
+            }
+        }
+    </script>
+</body>
+</html>

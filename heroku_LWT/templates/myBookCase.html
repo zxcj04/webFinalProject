@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset = "utf-8">
+    <title>尼蠔一絲書架</title>
+    <link rel="icon" href="{{ url_for('static', filename='icon128.ico') }}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
+    <link rel= "stylesheet" href= "{{ url_for('static', filename='myBookCaseMain.css') }}">
+    <!-- <link rel= "stylesheet" href= "{{ url_for('static', filename='SortBy.css') }}"> -->
+    
+</head>
+
+<body>
+    <a href={{ url_for('index') }}> 
+        <img src= "{{ url_for('static', filename='logo.png') }}">
+    </a>
+    <div id = "tt">
+        <br><br><br><br>&nbsp&nbsp<a href={{ url_for('index') }}>尼蠔~ 書架</a>
+        <span style="float: right; margin-right: 3%;">
+            <a href="{{ url_for('bookshelf') }}">
+                <span name= "userid">{{ current_user.id }}</span>
+            </a>
+            <input type="button" value="登出" onclick="location.href = '{{ url_for('logout') }}'" class="sub">
+        </span>
+    </div>
+    <hr width="100%">
+    <br>
+    <div id= "divvv">
+        <hr width="100%" style="height: 0px;">
+        <form method="POST" action="{{ url_for('bookshelf') }}">
+        <table style="width: 100%">
+            <caption>
+                我的書架
+            </caption>
+            <thead>
+                <tr>
+                    <td colspan="2">
+                        <hr width="100%">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"  style="text-align: right">
+                        <div class="selectOption">
+                            <!-- <select name="sources" id="sources" class="custom-select sources" placeholder="最近閱讀">
+                                <option value="recent">最近閱讀</option>
+                                <option value="byName">名稱</option>
+                            </select> -->
+                            <form action="{{ url_for('bookshelf') }}" method="POST" id="select_form">
+                                <select name="sources" class='sortBy'
+                                 onchange="get_data()" id="select">
+                                    <option value="recent">最近閱讀</option>
+                                    <option value="byName">名稱</option>
+                                </select>
+                            </form>
+                            &nbsp&nbsp<br>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>書籍</td>
+                    <td>上次讀到</td>
+                </tr>
+            </thead>
+            <tbody id="aj" class="table">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <br>
+                        <hr width="100%">
+                    </td>
+                </tr>
+                <tr style=" height: 50px;">
+                    <td colspan="2">
+                        <input type="button" onclick="location.href = '{{ url_for('upload') }}'" value="新增書籍" class="sub">
+                    </td>
+                </tr style=" height: 40px;">
+            </tfoot>
+        </table>
+        </form>
+    </div>
+
+    <br>
+    <footer>
+        <hr width="100%">
+        <p style="text-align: center;">
+            <br>Copyright&nbsp©<br>
+            2019 NTOU CS 2A<br>
+            00757015&nbspChiu + 00757051&nbspHuang<br>
+            - Look who's talking! -
+        </p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+
+        var books = [];
+        var recents = [];
+        var recent_numbers = [];
+
+        $(document).ready(function(){
+            get_data();
+        });
+
+        function get_data()
+        {
+            var sources = document.getElementById("select").value;
+
+            $("#aj").empty();
+
+            $("#aj").append("<tr class='books' id='tr'></tr>");
+            $("#tr").append("<td>載入中</td>");
+            $("#tr").append("<td>載入中</td>");
+
+            $.ajax({
+                url:"{{ url_for('update_bookshelf') }}",
+                type:"post",
+                contentType:"application/json",
+                data: JSON.stringify({"sources": sources}),
+                dataType: 'json',
+                processData:false,
+                success:function(data){
+                    books = data.books;
+                    recents = data.recents;
+                    recent_numbers = data.recent_numbers;
+
+                    $("#aj").empty();
+
+                    $.each(books, function(i, ele){
+                        $("#aj").append("<tr class='books' id='tr" + i + "'></tr>");
+                        $("#tr" + i).append("<td><a href='/book/" + books[i] + "'>" + books[i] + "</a></td>");
+                        $("#tr" + i).append("<td><a href='/book/" + books[i] + "/"+ recent_numbers[i] + "'>" + "第" + parseInt(recent_numbers[i]) + "章 " + recents[i] + "</a></td>");
+                    });
+                },
+                error:function(e){
+                    books = [];
+                    recents = [];
+                    recent_numbers = [];
+                }
+            });   
+        }
+
+    </script>
+    <!-- <script src="{{ url_for('static', filename='SortBy.js') }}">
+    </script>  -->
+</body>
+</html>

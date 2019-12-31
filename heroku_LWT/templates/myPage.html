@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset = "utf-8">
+    <title>尼蠔一絲閱讀</title>
+    <link rel="icon" href="{{ url_for('static', filename='icon128.ico') }}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap" rel="stylesheet">
+    <link rel= "stylesheet" href= "{{ url_for('static', filename='myPageMain.css') }}">
+</head>
+
+<body>
+    <div class= "elsePart">
+    <a href={{ url_for('index') }}> 
+        <img src= "{{ url_for('static', filename='logo.png') }}">
+        <span id = "tt">
+            <br><br>&nbsp&nbsp&nbsp尼蠔一絲閱讀<br><br>
+        </span>
+    </a>
+    </div>
+    <div id="navPart">
+        <button id= "smallScreen">&rarr;&larr;</button>
+        <nav>
+            {{ bookName }}
+        </nav>
+        <div id= "divvv">
+            <p class= "chapTitle">
+                第 {{ number }} 章 {{ pageName }}
+            </p>
+            <p class= "chapContent">
+                
+            </p>
+        </div>
+        <div id= "firstmenu" style="padding-top: 10px; text-align:center">
+            <input type="button" value="&larr;" class="feature" id="preChap"
+                onclick="get_data(0)">
+            <input type="button" value="&minus;" class="feature" id="fontSmall">
+            <input type="button" value="&equiv;" class="feature" id="menu">
+            <input type="button" value="&plus;" class="feature" id="fontBig">
+            <input type="button" value="&rarr;" class="feature" id="postChap"
+                onclick="get_data(1)">
+        </div>
+
+        <div id= "secondmenu" style="padding-top: 10px; text-align:center">
+            <input type="button" value="&#9763; Color" class="adjust" id="changeColor">
+            <input type="button" value="&#x1F3E0; Home" class="adjust" id="goHome"
+                onclick= "location.href = '{{ url_for('bookshelf') }}'">
+            <input type="button" value="&times; Close" class="adjust" id="closebtn">
+            <input type="button" value="&#x1F4d6; list" class="adjust" id="smile"
+                onclick= "location.href = '{{ url_for('in_book', bookName=bookName) }}'">
+            <input type="button" value="&harr; Whole" class="adjust" id="wholeScreen">
+        </div>
+    </div>
+
+    <div id= "colorPart">
+        <span id= "closeColor">&times;</span>
+        <span class= "eyeType">&#9786;</span>
+        <span class= "nightType">&#9786;</span>
+        <span class= "whiteblack">&#9786;</span>
+        <span class= "whitegreen">&#9786;</span>
+        <span class= "whiteindigo">&#9786;</span>
+        <span class= "whiteblue">&#9786;</span>
+        <span class= "whitepurple">&#9786;</span>
+        <span class= "whitepink">&#9786;</span>
+        <span class= "whitered">&#9786;</span>
+        <span class= "whiteorange">&#9786;</span>
+        <span class= "blackwhite">&#9786;</span>
+        <span class= "blackgreen">&#9786;</span>
+        <span class= "blackindigo">&#9786;</span>
+        <span class= "blackblue">&#9786;</span>
+        <span class= "blackpurple">&#9786;</span>
+        <span class= "blackpink">&#9786;</span>
+        <span class= "blackred">&#9786;</span>
+        <span class= "blackorange">&#9786;</span>
+        <span class= "whitegray">&#9786;</span>
+        <span class= "greenblack">&#9786;</span>
+        <span class= "indigoblack">&#9786;</span>
+        <span class= "blueblack">&#9786;</span>
+        <span class= "purpleblack">&#9786;</span>
+        <span class= "pinkblack">&#9786;</span>
+        <span class= "redblack">&#9786;</span>
+        <span class= "orangeblack">&#9786;</span>
+        <span class= "graywhite">&#9786;</span>
+        <span class= "greenwhite">&#9786;</span>
+        <span class= "indigowhite">&#9786;</span>
+        <span class= "bluewhite">&#9786;</span>
+        <span class= "purplewhite">&#9786;</span>
+        <span class= "pinkwhite">&#9786;</span>
+        <span class= "redwhite">&#9786;</span>
+        <span class= "orangewhite">&#9786;</span>
+        <span class= "bluegray">&#9786;</span>
+        <span class= "preetygreen">&#9786;</span>
+        <span class= "justblue">&#9786;</span>
+        <span class= "preetyblue">&#9786;</span>
+        <span class= "preetypurple">&#9786;</span>
+        <span class= "preetypink">&#9786;</span>
+        <span class= "preetybrown">&#9786;</span>
+        <span class= "preetyorange">&#9786;</span>
+        <span class= "preetydarkblue">&#9786;</span>
+        <span class= "preetyindigo">&#9786;</span>
+        <span class= "darkgreenwhite">&#9786;</span>
+        <span class= "pinkpurple">&#9786;</span>
+        <span class= "redyellow">&#9786;</span>
+        <span class= "orangetwoblack">&#9786;</span>
+        <span class= "webcolor">&#9786;</span>
+        <span class= "origin">&#9786;</span>
+        <span class= "yellowindigo">&#9786;</span>
+        <span class= "coral">&#9786;</span>
+        <span class= "graygray">&#9786;</span>
+        <span class= "bone">&#9786;</span>
+        <span class= "bakery">&#9786;</span>
+</div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+    <script src="{{ url_for('static', filename='myPageMain.js') }}">
+    </script> 
+    <script>
+        function htmlEncodeJQ ( str ) {
+            return $('<span/>').text( str ).html();
+        }
+
+        function htmlDecodeJQ ( str ) {
+            return $('<span/>').html( str ).text();
+        }
+
+        var content = [];
+
+        var number;
+
+        var isMax = false;
+
+        $(document).ready(function(){
+            number = parseInt({{ number }});
+
+            get_data();
+        });
+
+        function get_data(goto = 2)
+        {
+            if(goto == 0)
+            {
+                if(number == 1)
+                {
+                    return;
+                }
+                
+                number = number - 1;
+            }
+            else if(goto == 1)
+            {
+                if(isMax)
+                {
+                    return;
+                }
+
+                number = number + 1;
+            }
+
+            $("#divvv").empty();
+
+            $("#divvv").append("<p>載入中</p>");
+
+            $.ajax({
+                url:"{{ url_for('update_page') }}",
+                type:"post",
+                contentType:"application/json",
+                data: JSON.stringify({"number": number, "bookName" : "{{ bookName }}" }),
+                dataType: 'json',
+                processData:false,
+                success:function(data){
+                    content = data.content;
+
+                    if(data.isMax)  isMax = true;
+                    else    isMax = false;
+
+                    /*
+                    <div id= "divvv">
+                        <p class= "chapTitle">
+                            第 {{ number }} 章 {{ pageName }}
+                        </p>
+                        <p class= "chapContent">
+                            
+                        </p>
+                    </div>
+                    */
+
+                    $("#divvv").empty();
+
+                    $("#divvv").append("<p class= 'chapTitle'>第 " + number + " 章 " + data.pageName + "</p>");
+                    $("#divvv").append("<p class= 'chapContent'></p>");
+
+                    $.each(content, function(i, ele){
+                        $(".chapContent").append("<p class='in_content'> " + htmlEncodeJQ(ele) + " </p>");
+
+                        console.log( htmlEncodeJQ(ele));
+                    });
+                },
+                error:function(e){
+                    content = [];
+                }
+            });   
+        }
+
+    </script>
+</body>
+</html>
