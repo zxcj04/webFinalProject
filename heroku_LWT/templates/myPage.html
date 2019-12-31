@@ -123,6 +123,19 @@
         function htmlDecodeJQ ( str ) {
             return $('<span/>').html( str ).text();
         }
+        function jumpPage()
+        {
+            if (event.keyCode==37)//左 
+            {
+                get_data(0);
+            }
+            else if(event.keyCode==39)//右 
+            {
+                get_data(1);
+            }
+        }
+
+        document.onkeydown=jumpPage;
 
         var content = [];
 
