@@ -333,6 +333,13 @@ def in_page(bookName, number):
 
     return render_template("myPage.html", number=number, bookName=bookName, pageName=thePage["pageName"], content=thePage["text"])
 
+@app.route('/egg', methods=['GET'])
+@login_required
+def egg():
+    user = users.find_one({"id" : current_user.id})
+
+    return render_template("eggPage.html")
+
 basepath = os.path.dirname(__file__)
 UPLOAD_FOLDER = basepath + "/tmp"
 ALLOWED_EXTENSIONS = {'txt'}

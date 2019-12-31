@@ -11,6 +11,7 @@
 
 <body>
     <div class= "elsePart">
+        <span id="sh"></span>
         <img src= "{{ url_for('static', filename='logo.png') }}" onclick="up()">
         <a href={{ url_for('index') }}> 
             <span id = "tt">
@@ -21,24 +22,22 @@
     <div id="navPart">
         <button id= "smallScreen">&rarr;&larr;</button>
         <nav>
-            {{ bookName }}
+            這裡是...
         </nav>
         <div id= "divvv">
             <p class= "chapTitle">
-                第 {{ number }} 章 {{ pageName }}
+                第 erjkgksnksnb 章 zo zo flappybirds sul3
             </p>
             <p class= "chapContent">
-                
+                <iframe src="https://funhtml5games.com?embed=flappy" frameborder="0" marginheight="0" marginwidth="0" width="100%" scrolling="auto" height="500px" ></iframe>
             </p>
         </div>
         <div id= "firstmenu" style="padding-top: 10px; text-align:center">
-            <input type="button" value="&larr;" class="feature" id="preChap"
-                onclick="get_data(0)">
+            <input type="button" value="&larr;" class="feature" id="preChap">
             <input type="button" value="&minus;" class="feature" id="fontSmall">
             <input type="button" value="&equiv;" class="feature" id="menu">
             <input type="button" value="&plus;" class="feature" id="fontBig">
-            <input type="button" value="&rarr;" class="feature" id="postChap"
-                onclick="get_data(1)">
+            <input type="button" value="&rarr;" class="feature" id="postChap">
         </div>
 
         <div id= "secondmenu" style="padding-top: 10px; text-align:center">
@@ -114,128 +113,6 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>
     <script src="{{ url_for('static', filename='myPageMain.js') }}">
-    </script> 
-    <script>
-        function htmlEncodeJQ ( str ) {
-            return $('<span/>').text( str ).html();
-        }
-
-        function htmlDecodeJQ ( str ) {
-            return $('<span/>').html( str ).text();
-        }
-
-        function jumpPage()
-        {
-            if (event.keyCode==37)//左 
-            {
-                get_data(0);
-            }
-            else if(event.keyCode==39)//右 
-            {
-                get_data(1);
-            }
-        }
-
-        document.onkeydown=jumpPage;
-
-        var content = [];
-
-        var number;
-
-        var isMax = false;
-
-        $(document).ready(function(){
-            number = parseInt({{ number }});
-
-            get_data();
-        });
-
-        function get_data(goto = 2)
-        {
-            if(goto == 0)
-            {
-                if(number == 1)
-                {
-                    return;
-                }
-                
-                number = number - 1;
-            }
-            else if(goto == 1)
-            {
-                if(isMax)
-                {
-                    return;
-                }
-
-                number = number + 1;
-            }
-
-            $("#divvv").empty();
-
-            $("#divvv").append("<p>載入中</p>");
-
-            $.ajax({
-                url:"{{ url_for('update_page') }}",
-                type:"post",
-                contentType:"application/json",
-                data: JSON.stringify({"number": number, "bookName" : "{{ bookName }}" }),
-                dataType: 'json',
-                processData:false,
-                success:function(data){
-                    content = data.content;
-
-                    if(data.isMax)  isMax = true;
-                    else    isMax = false;
-
-                    /*
-                    <div id= "divvv">
-                        <p class= "chapTitle">
-                            第 {{ number }} 章 {{ pageName }}
-                        </p>
-                        <p class= "chapContent">
-                            
-                        </p>
-                    </div>
-                    */
-
-                    $("#divvv").empty();
-
-                    $("#divvv").append("<p class= 'chapTitle'>第 " + number + " 章 " + data.pageName + "</p>");
-                    $("#divvv").append("<p class= 'chapContent'></p>");
-
-                    $.each(content, function(i, ele){
-                        $(".chapContent").append("<p class='in_content'> " + htmlEncodeJQ(ele) + " </p>");
-
-                        console.log( htmlEncodeJQ(ele));
-                    });
-                },
-                error:function(e){
-                    content = [];
-                }
-            });   
-        }
-
-        var count = 0;
-
-        var hasnt = false
-
-        function up()
-        {
-            if(count < 5)
-                count += 1;
-
-            if(count >= 5 && !hasnt)
-            {
-                gogo();
-            }
-        }
-
-        function gogo()
-        {
-            location.href = '{{ url_for('egg') }}';
-        }
-
     </script>
 </body>
 </html>
